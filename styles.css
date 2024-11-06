@@ -1,0 +1,435 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+/* utilities */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Rubik", sans-serif;
+}
+
+body {
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  margin-inline: 20px;
+}
+
+/* burger */
+
+.burger-menu {
+  background-color: #484283;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  font-size: 20px;
+  width: 250px;
+  transition: all 1s ease-in-out;
+  translate: -250px;
+  z-index: 1;
+}
+
+.burger-menu.active {
+  translate: 0;
+}
+
+.nav-list {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding-left: 20px;
+  gap: 30px;
+}
+
+/* header */
+
+header {
+  position: sticky;
+  top: 0;
+  background-color: #484283;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px #ffffff78 solid;
+  padding-block: clamp(0.938rem, -0.341rem + 6.39vw, 3.75rem);
+}
+
+/* header-burger */
+
+.burger {
+  display: block;
+  background-color: #484283;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  span {
+    background-color: white;
+    position: absolute;
+    width: 24px;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+  span:nth-child(1) {
+    top: 0;
+    left: 0;
+  }
+  span:nth-child(2) {
+    top: 50%;
+    translate: 0 -50%;
+    left: 0;
+  }
+  span:nth-child(3) {
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.burger.active {
+  span:nth-child(2) {
+    opacity: 0;
+  }
+  span:nth-child(1) {
+    rotate: -45deg;
+    top: 10px;
+  }
+  span:nth-child(3) {
+    rotate: 45deg;
+    top: 10px;
+  }
+}
+
+.header-wraper-for-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+/* main */
+
+/* hero section */
+
+.hero-section {
+  padding-top: 20px;
+  background-color: #484283;
+  color: white;
+  line-height: 1.5;
+
+  h1 {
+    font-size: 34px;
+    font-weight: 500;
+  }
+  p {
+    font-size: 15px;
+    font-weight: 400;
+  }
+}
+
+.hero-button {
+  height: 60px;
+  width: 250px;
+  background-color: #f14f4f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-bottom: 50px;
+}
+
+/* products-section */
+
+.products-section {
+  padding-top: 30px;
+}
+
+.products-title {
+  font-size: 30px;
+  color: #444b58;
+  padding-bottom: 30px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.products-item-price {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.products-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+
+/* bio-section */
+
+.bio-section {
+  color: white;
+  background-color: #484283;
+  padding-top: 35px;
+  padding-bottom: 60px;
+  letter-spacing: 1.3px;
+}
+
+.bio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bio-title {
+  font-size: 18px;
+}
+
+.bio-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bio-logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 16px;
+  gap: 12px;
+}
+
+.bio-logo-img {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.bio-logo-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  span {
+    background-color: white;
+    position: absolute;
+    width: 32px;
+    height: 3px;
+  }
+}
+
+/* quiz-section */
+
+.quiz-section {
+  padding-block: 30px;
+}
+
+.quiz-container {
+  background-color: #fff4ee;
+  border-radius: 5px;
+}
+
+.quiz-title {
+  color: #444b58;
+  padding: 20px 20px 0 20px;
+}
+
+.quiz-main {
+  color: #808080;
+  padding: 20px;
+  border-bottom: 1px solid #444b58;
+}
+
+/* team-section */
+
+.team-title {
+  font-size: 18px;
+  padding-block: 30px;
+}
+
+.team-section {
+  color: white;
+  background-color: #484283;
+}
+
+.team-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.team-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.team-grid-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.team-grid-img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.team-grid-name {
+  font-size: 22px;
+}
+
+.team-grid-post {
+  padding-bottom: 50px;
+}
+
+/* faq-section */
+
+/* contacts-section */
+
+.contacts-section {
+  padding-block: 30px;
+  background-color: #f3f6f6;
+  color: #444b58;
+
+  a {
+    color: #444b58;
+  }
+}
+
+.contacts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contacts-title {
+  font-size: 28px;
+  padding-bottom: 20px;
+}
+
+.contacts-place {
+  color: #b2b5bb;
+}
+
+.contacts-item {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contacts-address {
+  font-size: 13.5px;
+}
+
+.contacts-phone {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.contacts-map {
+  max-width: 100%;
+}
+
+/* cta-section */
+
+.cta-section {
+  padding-block: 30px;
+}
+
+.cta-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #484283;
+  color: white;
+  border-radius: 5px;
+}
+
+.cta-subtitle {
+  padding-block: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.cta-item {
+  padding-inline: 10px;
+  padding-block: 20px;
+  border-radius: 5px;
+  border: none;
+}
+
+.cta-button {
+  background-color: #f14f4f;
+  color: white;
+}
+
+/* footer */
+
+footer {
+  background-color: #444b58;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
+.footer-nav {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  list-style: none;
+  font-size: 21px;
+}
+
+/* media - laptop */
+
+@media screen and (width > 1023px) {
+}
