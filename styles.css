@@ -320,6 +320,8 @@ header {
 
 /* faq-section */
 
+faq.
+
 /* contacts-section */
 
 .contacts-section {
@@ -360,6 +362,7 @@ header {
 .contacts-phone {
   font-size: 30px;
   font-weight: bold;
+  color: #444b58;
 }
 
 .contacts-map {
