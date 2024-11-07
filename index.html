@@ -8,18 +8,20 @@
     <script defer src="scripts.js"></script>
   </head>
   <body>
+    <!-- burger-menu -->
     <div class="burger-menu">
       <nav>
         <ul class="nav-list">
-          <li><a href="index.html">Каталог</a></li>
-          <li><a href="index.html">О нас</a></li>
-          <li><a href="index.html">Подбор товара</a></li>
-          <li><a href="index.html">Наша команда</a></li>
-          <li><a href="index.html">Доставка и оплата</a></li>
-          <li><a href="index.html">Контакты</a></li>
+          <li><a href="#products-section">Каталог</a></li>
+          <li><a href="#bio-section">О нас</a></li>
+          <li><a href="#quiz-section">Подбор товара</a></li>
+          <li><a href="#team-section">Наша команда</a></li>
+          <li><a href="#contacts-section">Доставка и оплата</a></li>
+          <li><a href="#contacts-section">Контакты</a></li>
         </ul>
       </nav>
     </div>
+
     <!--  header -->
     <header>
       <div class="header-container container">
@@ -45,7 +47,7 @@
     <!-- main -->
     <main>
       <!-- hero-section -->
-      <section class="hero-section">
+      <section id="hero-section" class="hero-section">
         <div class="hero-container container">
           <h1>Кроссовки известных брендов с доставкой по России и СНГ</h1>
           <p>
@@ -57,7 +59,7 @@
       </section>
 
       <!-- products-section -->
-      <section class="products-section">
+      <section id="products-section" class="products-section">
         <div class="products-container container">
           <h2 class="products-title">Каталог</h2>
           <div class="products-grid">
@@ -68,42 +70,42 @@
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item">
+            <div class="products-item products-item-2">
               <img src="Images/foot.jpg" alt="Картинка ботинка" />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item">
+            <div class="products-item products-item-2">
               <img src="Images/foot.jpg" alt="Картинка ботинка" />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item">
+            <div class="products-item products-item-2">
               <img src="Images/foot.jpg" alt="Картинка ботинка" />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item">
+            <div class="products-item products-item-2">
               <img src="Images/foot.jpg" alt="Картинка ботинка" />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item">
+            <div class="products-item products-item-2">
               <img src="Images/foot.jpg" alt="Картинка ботинка" />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item">
+            <div class="products-item products-item-2">
               <img src="Images/foot.jpg" alt="Картинка ботинка" />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
@@ -111,11 +113,12 @@
               <p class="products-item-price">11 000 р</p>
             </div>
           </div>
+          <button class="products-button">Показать еще</button>
         </div>
       </section>
 
       <!-- bio-section -->
-      <section class="bio-section">
+      <section id="bio-section" class="bio-section">
         <div class="bio-container container">
           <div class="bio-title"><h2>Пара слов о нас</h2></div>
           <div class="bio-main">
@@ -143,8 +146,7 @@
     </main>
 
     <!-- quiz-section -->
-
-    <section class="quiz-section">
+    <section id="quiz-section" class="quiz-section">
       <div class="quiz-container container">
         <h2 class="quiz-title">Мы подберем идеальную пару для вас</h2>
         <p class="quiz-main">
@@ -155,8 +157,7 @@
     </section>
 
     <!-- team-section -->
-
-    <section class="team-section">
+    <section id="team-section" class="team-section">
       <div class="team-container container">
         <div class="team-title"><h2>Наша команда</h2></div>
         <div class="team-grid">
@@ -253,14 +254,33 @@
     </section>
 
     <!-- faq-section -->
-
-    <section class="faq-section">
-      <div class="faq-container container"></div>
+    <section id="faq-section" class="faq-section">
+      <div class="faq-container container">
+        <h2 class="faq-title">Часто задаваемые вопросы</h2>
+        <div class="faq-main">
+          <div class="faq-line"></div>
+          <div class="faq-item">
+            <p class="faq-question">Вопрос 1</p>
+            <button class="faq-button faq-button-1">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+          <div class="faq-line"></div>
+          <div class="faq-item">
+            <p class="faq-question">Вопрос 1</p>
+            <button class="faq-button faq-button-2">
+              <span class="faq-plus"></span>
+              <span class="faq-plus"></span>
+            </button>
+          </div>
+          <div class="faq-line"></div>
+        </div>
+      </div>
     </section>
 
     <!-- contacts-section -->
-
-    <section class="contacts-section">
+    <section id="contacts-section" class="contacts-section">
       <div class="contacts-container container">
         <h2 class="contacts-title">Контакты</h2>
         <div class="contacts-item">
@@ -301,14 +321,12 @@
     </section>
 
     <!-- cta-section -->
-
-    <section class="cta-section">
+    <section id="cta-section" class="cta-section">
       <div class="cta-container container">
         <h2 class="cta-title">Есть вопросы?</h2>
         <p class="cta-subtitle">
           Заполните форму и наш менеджер свяжется с вами
         </p>
-
         <form class="cta-main" action="#" method="post">
           <input
             class="cta-item"
@@ -337,12 +355,12 @@
         <img src="Images/logo.svg" alt="Лого магазина" />
       </div>
       <ul class="footer-nav">
-        <li><a href="index.html">Каталог</a></li>
-        <li><a href="index.html">О нас</a></li>
-        <li><a href="index.html">Подбор товара</a></li>
-        <li><a href="index.html">Наша команда</a></li>
-        <li><a href="index.html">Доставка и оплата</a></li>
-        <li><a href="index.html">Контакты</a></li>
+        <li><a href="#products-section">Каталог</a></li>
+        <li><a href="#bio-section">О нас</a></li>
+        <li><a href="#quiz-section">Подбор товара</a></li>
+        <li><a href="#team-section">Наша команда</a></li>
+        <li><a href="#contacts-section">Доставка и оплата</a></li>
+        <li><a href="#contacts-section">Контакты</a></li>
       </ul>
     </footer>
   </body>
