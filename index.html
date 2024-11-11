@@ -64,49 +64,95 @@
           <h2 class="products-title">Каталог</h2>
           <div class="products-grid">
             <div class="products-item">
-              <img src="Images/foot.jpg" alt="Картинка ботинка" />
+              <div class="products-item-img-btns">
+                <img
+                  class="products-item-img"
+                  src="Images/foot.jpg"
+                  alt="Картинка ботинка"
+                />
+                <div class="products-item-btns">
+                  <button class="products-item-btn">
+                    <img
+                      class="svg svg-eye"
+                      src="Images/Eye.svg"
+                      alt="Посмотреть товары"
+                    />
+                  </button>
+                  <button class="products-item-btn">
+                    <img
+                      class="svg svg-vector"
+                      src="Images/Vector.svg"
+                      alt="Добавить в корзину"
+                    />
+                  </button>
+                </div>
+              </div>
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
             <div class="products-item products-item-2">
-              <img src="Images/foot.jpg" alt="Картинка ботинка" />
+              <img
+                class="products-item-img"
+                src="Images/foot.jpg"
+                alt="Картинка ботинка"
+              />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
             <div class="products-item products-item-2">
-              <img src="Images/foot.jpg" alt="Картинка ботинка" />
+              <img
+                class="products-item-img"
+                src="Images/foot.jpg"
+                alt="Картинка ботинка"
+              />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
             <div class="products-item products-item-2">
-              <img src="Images/foot.jpg" alt="Картинка ботинка" />
+              <img
+                class="products-item-img"
+                src="Images/foot.jpg"
+                alt="Картинка ботинка"
+              />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
             <div class="products-item products-item-2">
-              <img src="Images/foot.jpg" alt="Картинка ботинка" />
+              <img
+                class="products-item-img"
+                src="Images/foot.jpg"
+                alt="Картинка ботинка"
+              />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
             <div class="products-item products-item-2">
-              <img src="Images/foot.jpg" alt="Картинка ботинка" />
+              <img
+                class="products-item-img"
+                src="Images/foot.jpg"
+                alt="Картинка ботинка"
+              />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
             <div class="products-item products-item-2">
-              <img src="Images/foot.jpg" alt="Картинка ботинка" />
+              <img
+                class="products-item-img"
+                src="Images/foot.jpg"
+                alt="Картинка ботинка"
+              />
               <p class="products-item-info">
                 Кроссовки Nike Air Force 1 '07 QS
               </p>
@@ -258,23 +304,35 @@
       <div class="faq-container container">
         <h2 class="faq-title">Часто задаваемые вопросы</h2>
         <div class="faq-main">
-          <div class="faq-line"></div>
+          <p class="faq-just-line"></p>
           <div class="faq-item">
-            <p class="faq-question">Вопрос 1</p>
-            <button class="faq-button faq-button-1">
-              <span></span>
-              <span></span>
-            </button>
+            <div class="faq-question-wraper">
+              <p class="faq-question">Вопрос 1</p>
+              <button class="faq-button faq-button-1">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+            <p class="faq-answer faq-answer-1">
+              А это ответ 1: в комплексе функционируют 6 детских садов с
+              площадками, воспитателями и всякими другими людьми
+            </p>
           </div>
-          <div class="faq-line"></div>
+          <p class="faq-just-line"></p>
           <div class="faq-item">
-            <p class="faq-question">Вопрос 1</p>
-            <button class="faq-button faq-button-2">
-              <span class="faq-plus"></span>
-              <span class="faq-plus"></span>
-            </button>
+            <div class="faq-question-wraper">
+              <p class="faq-question">Вопрос 1</p>
+              <button class="faq-button faq-button-2">
+                <span class="faq-plus"></span>
+                <span class="faq-plus"></span>
+              </button>
+            </div>
+            <p class="faq-answer faq-answer-2">
+              А это ответ 1: в комплексе функционируют 6 детских садов с
+              площадками, воспитателями и всякими другими людьми
+            </p>
           </div>
-          <div class="faq-line"></div>
+          <p class="faq-just-line"></p>
         </div>
       </div>
     </section>
@@ -284,7 +342,17 @@
       <div class="contacts-container container">
         <h2 class="contacts-title">Контакты</h2>
         <div class="contacts-item">
-          <p class="contacts-place">ГЛАВНЫЙ ОФИС</p>
+          <div class="contacts-place-btn">
+            <h4 class="contacts-place">ГЛАВНЫЙ ОФИС</h4>
+            <span class="contacts-tooltip">
+              <button class="contacts-button">?</button>
+              <span class="contacts-tooltip-txt">
+                Адрес и телефон для корреспонденции, инвесторов. Вопросы о
+                доставке, качестве обслуживания и товара просьба задавать в
+                отдел продаж
+              </span>
+            </span>
+          </div>
           <a class="contacts-phone" href="tel:+7 800 789 89 89"
             >+7 800 789 89 89</a
           >
@@ -293,7 +361,7 @@
           </p>
         </div>
         <div class="contacts-item">
-          <p class="contacts-place">ОТДЕЛ ПРОДАЖ</p>
+          <h4 class="contacts-place">ОТДЕЛ ПРОДАЖ</h4>
           <a class="contacts-phone" href="tel:+7 800 789 89 89"
             >+7 800 789 89 89</a
           >
@@ -327,7 +395,7 @@
         <p class="cta-subtitle">
           Заполните форму и наш менеджер свяжется с вами
         </p>
-        <form class="cta-main" action="#" method="post">
+        <form id="cta-form" class="cta-form" action="#" method="post">
           <input
             class="cta-item"
             type="text"

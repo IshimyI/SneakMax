@@ -20,15 +20,40 @@ body {
 
 a {
   color: white;
+  transition: all 0.3s ease-in-out;
   text-decoration: none;
+  position: relative;
 }
 
-a:hover {
-  text-decoration: underline;
+a:active {
+  color: #cccccc;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background-color: #cccccc;
+  transition: width 0.3s ease-in-out;
+}
+
+a:active::after {
+  width: 100%;
 }
 
 .container {
   margin-inline: 20px;
+}
+
+section {
+  scroll-margin-top: 30px;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 /* burger */
@@ -37,14 +62,14 @@ a:hover {
   background-color: #484283;
   color: white;
   position: fixed;
-  top: 0;
+  top: 50px;
   left: 0;
   bottom: 0;
   font-size: 20px;
-  width: 250px;
+  width: 230px;
   transition: all 1s ease-in-out;
-  translate: -250px;
-  z-index: 1;
+  translate: -230px;
+  z-index: 10;
 }
 
 .burger-menu.active {
@@ -66,6 +91,7 @@ header {
   position: sticky;
   top: 0;
   background-color: #484283;
+  z-index: 20;
 }
 
 .header-container {
@@ -226,6 +252,67 @@ header {
   padding-bottom: 30px;
 }
 
+.products-item-img-btns {
+  position: relative;
+}
+
+.products-item-img {
+  opacity: 1;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.products-item-img:hover {
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.products-item-btns {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  gap: 25px;
+}
+
+.opacity {
+  opacity: 0.5;
+}
+
+.products-item-btn {
+  width: 80px;
+  height: 80px;
+  background-color: #444b58;
+  border: none;
+  border-radius: 40px;
+  transition: all 0.3s ease-in-out;
+}
+
+.products-item-btn:active {
+  background-color: #f14f4f;
+  .svg {
+    background-color: #f14f4f;
+  }
+}
+
+.svg {
+  background-color: #444b58;
+  transition: all 0.3s ease-in-out;
+}
+
+.svg-eye {
+  width: 35px;
+  height: 35px;
+}
+
+.svg-vector {
+  width: 32px;
+  height: 30px;
+}
+
 /* bio-section */
 
 .bio-section {
@@ -234,6 +321,9 @@ header {
   padding-top: 35px;
   padding-bottom: 60px;
   letter-spacing: 1.3px;
+  background-image: url("Images/figure.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .bio-container {
@@ -357,6 +447,7 @@ header {
 
 .faq-title {
   font-size: 28px;
+  padding-bottom: 40px;
 }
 
 .faq-button {
@@ -366,6 +457,7 @@ header {
   width: 30px;
   height: 30px;
   border: none;
+  transition: all ease-in-out 0.3s;
   span {
     position: absolute;
     background-color: #444b58;
@@ -386,15 +478,48 @@ header {
   }
 }
 
+.faq-button-open {
+  transform: rotate(45deg);
+}
+
+.faq-question-wraper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .faq-question {
   font-weight: 500;
   font-size: 20px;
 }
 
-.faq-item {
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height ease-in-out 0.5s, color ease-in-out 0.5s;
+  color: #24242400;
+}
+
+.faq-answer::before,
+.faq-answer::after {
+  content: "";
+  display: block;
+  height: 30px;
+}
+
+.faq-answer-open {
+  max-height: 300px;
+  color: #24242480;
+}
+
+.faq-main {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faq-just-line {
+  border: #444b58 solid 0.5px;
 }
 
 .faq-main {
@@ -428,8 +553,55 @@ header {
   padding-top: 30px;
 }
 
+.contacts-place-btn {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+.contacts-button {
+  background-color: #fff;
+  color: #444b58;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.contacts-tooltip {
+  width: 25px;
+  height: 25px;
+}
+
+.contacts-tooltip-txt {
+  background-color: white;
+  color: #444b58;
+  font-size: 14px;
+  padding: 20px 18px 18px 22px;
+  border-radius: 10px;
+  width: 200px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  z-index: 0;
+}
+
+.contacts-button:hover + .contacts-tooltip-txt,
+.contacts-button:focus + .contacts-tooltip-txt {
+  opacity: 1;
+  transform: translate(-50%);
+  z-index: 1;
+}
+
 .contacts-place {
   color: #b2b5bb;
+  font-weight: 100;
 }
 
 .contacts-item {
@@ -446,6 +618,14 @@ header {
   font-size: 30px;
   font-weight: bold;
   color: #444b58;
+}
+
+.contacts-phone:active {
+  color: #f14f4f;
+}
+
+.contacts-phone:active::after {
+  width: 0;
 }
 
 .contacts-map {
@@ -481,7 +661,7 @@ header {
   align-items: center;
 }
 
-.cta-main {
+.cta-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
