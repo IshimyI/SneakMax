@@ -7,16 +7,6 @@ buttonBurger.addEventListener("click", () => {
   document.body.classList.toggle("no-scroll");
 });
 
-// const productsChoose = document.querySelectorAll(
-//   ".products-item-img",
-//   ".products-item-btns"
-// );
-// productsImage("mouseover", () => {
-//   productsImage.forEach((el) => {
-//     el.classList.toggle("opacity");
-//   });
-// });
-
 const buttonOpenProducts = document.querySelector(".products-button");
 const products = document.querySelectorAll(".products-item-2");
 
