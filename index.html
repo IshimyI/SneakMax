@@ -46,6 +46,120 @@
 
     <!-- main -->
     <main>
+      <!-- dialog-product -->
+      <dialog id="dialog-product" class="dialog-product">
+        <div class="dialog-container container">
+          <img
+            src="Images/foot 2.jpg"
+            alt="Главное фото обозреваемого ботинка"
+          />
+          <div class="small-imgs">
+            <img
+              class="small-img"
+              src="Images/foot 2.jpg"
+              alt="Доп фото обозреваемого ботинка 1"
+            />
+            <img
+              class="small-img"
+              src="Images/foot 2.jpg"
+              alt="Доп фото обозреваемого ботинка 2"
+            />
+            <img
+              class="small-img"
+              src="Images/foot 2.jpg"
+              alt="Доп фото обозреваемого ботинка 3"
+            />
+            <img
+              class="small-img"
+              src="Images/foot 2.jpg"
+              alt="Доп фото обозреваемого ботинка 4"
+            />
+            <img
+              class="small-img"
+              src="Images/foot 2.jpg"
+              alt="Доп фото обозреваемого ботинка 5"
+            />
+            <img
+              class="small-img"
+              src="Images/foot 2.jpg"
+              alt="Доп фото обозреваемого ботинка 6"
+            />
+          </div>
+          <div class="dialog-product-header">
+            <div class="number">
+              <span> Артикул: </span>
+              <span>879876</span>
+            </div>
+            <div class="quonity">
+              <span>В наличии:</span>
+              <span>13 шт</span>
+            </div>
+          </div>
+
+          <div class="dialog-product-title">
+            <p>Женские кроссовки Puma Force 1 Shadow</p>
+          </div>
+          <div class="rating">
+            <span class="rating-star">&#9733;</span>
+            <span class="rating-star">&#9733;</span>
+            <span class="rating-star">&#9733;</span>
+            <span class="rating-star">&#9733;</span>
+            <span class="rating-star">&#9733;</span>
+          </div>
+          <div class="size-btns">
+            <button class="size-btn">36</button>
+            <button class="size-btn">36</button>
+            <button class="size-btn">36</button>
+            <button class="size-btn">36</button>
+            <button class="size-btn">36</button>
+          </div>
+          <div class="prices">
+            <div class="price-sale">19 789 ₽</div>
+            <div class="price-no-sale">20 578 ₽</div>
+          </div>
+          <button class="add-to-cart">Заказать</button>
+          <div class="pluses-delivery">
+            <div class="plus-delivery">
+              ✔︎
+              <span>Бесплатная доставка до двери</span>
+            </div>
+            <div class="plus-delivery">
+              ✔︎
+              <span>Оплата заказа при получении</span>
+            </div>
+            <div class="plus-delivery">
+              ✔︎
+              <span>Обмен в течении двух недель</span>
+            </div>
+          </div>
+          <div class="description">
+            <p class="description-title">Описание</p>
+            <p class="description-main">
+              Кроссовки Nike Blazer Mid '77 Vintage Suede с винтажной подошвой
+              возрождают стиль баскетбольных моделей Nike прошлого, создавая
+              впечатление, что они хранились в шкафу долгие годы.
+            </p>
+          </div>
+
+          <div class="characteristic">
+            <p class="characteristic-title">Характеристики</p>
+            <div class="characteristic-main">
+              <div class="characteristic-item">
+                <p>Пол: Мужской</p>
+                <p>Цвета: Разноцветный</p>
+                <p>Состав: Кожа, текстиль, резина</p>
+                <p>Страна: Вьетнам</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </dialog>
+      <!-- dialog-basket -->
+
+      <dialog id="dialog-basket" class="dialog-basket">
+        <div class="dialog-container container"></div>
+      </dialog>
+
       <!-- hero-section -->
       <section id="hero-section" class="hero-section">
         <div class="hero-container container">
@@ -514,10 +628,11 @@
           />
           <input
             class="cta-item"
-            type="tel"
-            id="cta-tel"
-            name="cta-tel"
+            type="text"
+            id="phone"
             placeholder="Номер телефона"
+            data-phone-pattern="+7 (___) ___-__-__"
+            data-phone-clear="true"
             required
           />
           <button class="cta-item cta-button" type="submit">Отправить</button>
