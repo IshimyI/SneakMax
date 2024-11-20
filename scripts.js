@@ -41,31 +41,6 @@ ctaForm.addEventListener("submit", async (event) => {
   alert(JSON.stringify(data));
 });
 
-const productView = document.querySelectorAll(".svg-eye");
-const dialogProduct = document.querySelector("#dialog-product");
-
-// Функция для переключения состояния диалога
-function toggleDialog() {
-  if (dialogProduct.open) {
-    dialogProduct.close();
-  } else {
-    dialogProduct.showModal();
-  }
-}
-
-productView.forEach((el) => {
-  el.addEventListener("click", () => {
-    toggleDialog();
-  });
-});
-
-// Закрытие диалога при клике вне его области
-dialogProduct.addEventListener("click", (event) => {
-  if (event.target === dialogProduct) {
-    toggleDialog();
-  }
-});
-
 document.addEventListener("DOMContentLoaded", function () {
   var eventCalllback = function (e) {
     var el = e.target,
@@ -96,6 +71,33 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let ev of ["input", "blur", "focus"]) {
       elem.addEventListener(ev, eventCalllback);
     }
+  }
+});
+
+// dialog-product
+
+const productView = document.querySelectorAll(".product-open");
+const dialogProduct = document.querySelector("#dialog-product");
+
+// Функция для переключения состояния диалога
+function toggleProductDialog() {
+  if (dialogProduct.open) {
+    dialogProduct.close();
+  } else {
+    dialogProduct.showModal();
+  }
+}
+
+productView.forEach((el) => {
+  el.addEventListener("click", () => {
+    toggleProductDialog();
+  });
+});
+
+// Закрытие диалога при клике вне его области
+dialogProduct.addEventListener("click", (event) => {
+  if (event.target === dialogProduct) {
+    toggleProductDialog();
   }
 });
 
@@ -158,4 +160,31 @@ smallImgSix.addEventListener("mouseover", () => {
 smallImgSix.addEventListener("mouseout", () => {
   bigImgOne.classList.add("big-img-z");
   bigImgSix.classList.remove("big-img-z");
+});
+
+// dialog-basket
+
+const basketView = document.querySelectorAll(".basket-open");
+const dialogBasket = document.querySelector("#dialog-basket");
+
+// Функция для переключения состояния диалога
+function toggleBasketDialog() {
+  if (dialogBasket.open) {
+    dialogBasket.close();
+  } else {
+    dialogBasket.showModal();
+  }
+}
+
+basketView.forEach((el) => {
+  el.addEventListener("click", () => {
+    toggleBasketDialog();
+  });
+});
+
+// Закрытие диалога при клике вне его области
+dialogBasket.addEventListener("click", (event) => {
+  if (event.target === dialogBasket) {
+    toggleBasketDialog();
+  }
 });
