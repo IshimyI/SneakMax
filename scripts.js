@@ -98,3 +98,64 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+const smallImgOne = document.querySelector(".small-img-1");
+const smallImgTwo = document.querySelector(".small-img-2");
+const smallImgThree = document.querySelector(".small-img-3");
+const smallImgFour = document.querySelector(".small-img-4");
+const smallImgFive = document.querySelector(".small-img-5");
+const smallImgSix = document.querySelector(".small-img-6");
+
+const bigImgOne = document.querySelector(".big-img-1");
+const bigImgTwo = document.querySelector(".big-img-2");
+const bigImgThree = document.querySelector(".big-img-3");
+const bigImgFour = document.querySelector(".big-img-4");
+const bigImgFive = document.querySelector(".big-img-5");
+const bigImgSix = document.querySelector(".big-img-6");
+
+smallImgTwo.addEventListener("mouseover", () => {
+  bigImgOne.classList.remove("big-img-z");
+  bigImgTwo.classList.add("big-img-z");
+});
+
+smallImgTwo.addEventListener("mouseout", () => {
+  bigImgOne.classList.add("big-img-z");
+  bigImgTwo.classList.remove("big-img-z");
+});
+
+smallImgThree.addEventListener("mouseover", () => {
+  bigImgOne.classList.remove("big-img-z");
+  bigImgThree.classList.add("big-img-z");
+});
+
+smallImgThree.addEventListener("mouseout", () => {
+  bigImgOne.classList.add("big-img-z");
+  bigImgThree.classList.remove("big-img-z");
+});
+smallImgFour.addEventListener("mouseover", () => {
+  bigImgOne.classList.remove("big-img-z");
+  bigImgFour.classList.add("big-img-z");
+});
+
+smallImgFour.addEventListener("mouseout", () => {
+  bigImgOne.classList.add("big-img-z");
+  bigImgFour.classList.remove("big-img-z");
+});
+smallImgFive.addEventListener("mouseover", () => {
+  bigImgOne.classList.remove("big-img-z");
+  bigImgFive.classList.add("big-img-z");
+});
+
+smallImgFive.addEventListener("mouseout", () => {
+  bigImgOne.classList.add("big-img-z");
+  bigImgFive.classList.remove("big-img-z");
+});
+smallImgSix.addEventListener("mouseover", () => {
+  bigImgOne.classList.remove("big-img-z");
+  bigImgSix.classList.add("big-img-z");
+});
+
+smallImgSix.addEventListener("mouseout", () => {
+  bigImgOne.classList.add("big-img-z");
+  bigImgSix.classList.remove("big-img-z");
+});
