@@ -195,7 +195,7 @@ dialogBasket.addEventListener("click", (event) => {
 //
 //
 
-let basketItems = []; // Массив для хранения товаров в корзине
+const basketItems = []; // Массив для хранения товаров в корзине
 
 // Функция добавления товара в корзину
 function addToBasket(name, image, price) {
@@ -227,7 +227,9 @@ function renderBasketItems() {
         <p class="basket-item-name">${item.name}</p>
         <p class="basket-item-price">${item.price} ₽</p>
       </div>
-      <button class="basket-item-delete" data-id="${item.id}" data-index="${index}"> <img src="Images/trash.svg" alt="Удалить" /></button>
+      <button class="basket-item-delete" data-id="${item.id}" data-index="${index}">
+       <img src="Images/trash.svg" alt="Удалить" />
+      </button>
     `;
 
     // Добавляем товар в корзину
@@ -279,57 +281,50 @@ function updateBasketSum() {
   document.querySelector(".basket-sum-subtitle").textContent = `${totalSum} ₽`; // Обновляем текст суммы
 }
 
-const addToCart1 = document.querySelectorAll(".add-to-cart-1");
-const addToCart2 = document.querySelectorAll(".add-to-cart-2");
-const addToCart3 = document.querySelectorAll(".add-to-cart-3");
-const addToCart4 = document.querySelectorAll(".add-to-cart-4");
-const addToCart5 = document.querySelectorAll(".add-to-cart-5");
-const addToCart6 = document.querySelectorAll(".add-to-cart-6");
+const productsBase = [
+  {
+    className: ".add-to-cart-1",
+    name: "Женские кроссовки Puma Force 1 Shadow",
+    image: "Images/foot 2-new.jpeg",
+    price: 11111,
+  },
+  {
+    className: ".add-to-cart-2",
+    name: "Кроссовки Nike Air Force 1 '07 QS",
+    image: "Images/foot.jpg",
+    price: 222222,
+  },
+  {
+    className: ".add-to-cart-3",
+    name: "Женские кроссовки Puma Force 1 Shadow",
+    image: "Images/foot 2-new.jpeg",
+    price: 333333,
+  },
+  {
+    className: ".add-to-cart-4",
+    name: "Кроссовки Nike Air Force 1 '07 QS",
+    image: "Images/foot.jpg",
+    price: 44444,
+  },
+  {
+    className: ".add-to-cart-5",
+    name: "Женские кроссовки Puma Force 1 Shadow",
+    image: "Images/foot 2-new.jpeg",
+    price: 5555,
+  },
+  {
+    className: ".add-to-cart-6",
+    name: "Кроссовки Nike Air Force 1 '07 QS",
+    image: "Images/foot.jpg",
+    price: 666,
+  },
+];
 
-addToCart1.forEach((el) => {
-  el.addEventListener("click", () => {
-    addToBasket(
-      "Женские кроссовки Puma Force 1 Shadow",
-      "Images/foot 2-new.jpeg",
-      11111
-    );
-  });
-});
-
-addToCart2.forEach((el) => {
-  el.addEventListener("click", () => {
-    addToBasket("Кроссовки Nike Air Force 1 '07 QS", "Images/foot.jpg", 222222);
-  });
-});
-
-addToCart3.forEach((el) => {
-  el.addEventListener("click", () => {
-    addToBasket(
-      "Женские кроссовки Puma Force 1 Shadow",
-      "Images/foot 2-new.jpeg",
-      333333
-    );
-  });
-});
-
-addToCart4.forEach((el) => {
-  el.addEventListener("click", () => {
-    addToBasket("Кроссовки Nike Air Force 1 '07 QS", "Images/foot.jpg", 44444);
-  });
-});
-
-addToCart5.forEach((el) => {
-  el.addEventListener("click", () => {
-    addToBasket(
-      "Женские кроссовки Puma Force 1 Shadow",
-      "Images/foot 2-new.jpeg",
-      5555
-    );
-  });
-});
-
-addToCart6.forEach((el) => {
-  el.addEventListener("click", () => {
-    addToBasket("Кроссовки Nike Air Force 1 '07 QS", "Images/foot.jpg", 666);
+productsBase.forEach((product) => {
+  const elements = document.querySelectorAll(product.className);
+  elements.forEach((el) => {
+    el.addEventListener("click", () => {
+      addToBasket(product.name, product.image, product.price);
+    });
   });
 });

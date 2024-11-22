@@ -536,21 +536,11 @@ header {
 
 .products-item-img {
   opacity: 1;
-  z-index: 1;
   transition: all 0.3s ease-in-out;
 }
 
 .products-item-img-btns {
   position: relative;
-}
-
-.products-item-img-btns:hover {
-  .products-item-img {
-    opacity: 0.5;
-  }
-  .products-item-btns {
-    z-index: 1;
-  }
 }
 
 .products-item-btns {
@@ -560,12 +550,23 @@ header {
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
-  z-index: -3;
   gap: 25px;
+  opacity: 0;
+  z-index: 10;
+  transition: all 0.4s ease-in-out;
 }
 
-.opacity {
-  opacity: 0.5;
+.products-item-img-btns:hover {
+  .products-item-img {
+    opacity: 0.5;
+  }
+  .products-item-btns {
+    opacity: 1;
+  }
+}
+
+.opacityZero {
+  opacity: 0;
 }
 
 .products-item-btn {
