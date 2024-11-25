@@ -24,21 +24,34 @@
 
     <!--  header -->
     <header>
-      <div class="header-container container">
-        <div class="header-logo">
-          <img src="Images/logo.svg" alt="Лого магазина" />
-        </div>
-        <div class="header-wraper-for-nav">
-          <button class="burger">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <div class="header-nav"></div>
-          <div class="header-basket">
-            <button class="basket-open header-basket">
-              <img src="Images/Vector.svg" alt="Корзина" />
+      <div class="header-wrapper">
+        <div class="header-container container">
+          <div class="header-logo">
+            <img src="Images/logo.svg" alt="Лого магазина" />
+          </div>
+
+          <div class="header-wraper-for-nav">
+            <nav>
+              <ul class="header-nav-list">
+                <li><a href="#products-section">Каталог</a></li>
+                <li><a href="#bio-section">О нас</a></li>
+                <li><a href="#quiz-section">Подбор товара</a></li>
+                <li><a href="#team-section">Наша команда</a></li>
+                <li><a href="#contacts-section">Доставка и оплата</a></li>
+                <li><a href="#contacts-section">Контакты</a></li>
+              </ul>
+            </nav>
+            <button class="burger">
+              <span></span>
+              <span></span>
+              <span></span>
             </button>
+            <div class="header-nav"></div>
+            <div class="header-basket">
+              <button class="basket-open header-basket">
+                <img src="Images/Vector.svg" alt="Корзина" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -257,7 +270,9 @@
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item products-item-2">
+            <div
+              class="products-item products-item-2 products-item-4 products-item-5"
+            >
               <div class="products-item-img-btns">
                 <img
                   class="products-item-img"
@@ -286,7 +301,9 @@
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item products-item-2">
+            <div
+              class="products-item products-item-3 products-item-4 products-item-5"
+            >
               <div class="products-item-img-btns">
                 <img
                   class="products-item-img"
@@ -315,7 +332,7 @@
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item products-item-2">
+            <div class="products-item products-item-4 products-item-5">
               <div class="products-item-img-btns">
                 <img
                   class="products-item-img"
@@ -344,7 +361,7 @@
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item products-item-2">
+            <div class="products-item products-item-5">
               <div class="products-item-img-btns">
                 <img
                   class="products-item-img"
@@ -373,7 +390,7 @@
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item products-item-2">
+            <div class="products-item products-item-5">
               <div class="products-item-img-btns">
                 <img
                   class="products-item-img"
@@ -402,7 +419,7 @@
               </p>
               <p class="products-item-price">11 000 р</p>
             </div>
-            <div class="products-item products-item-2">
+            <div class="products-item products-item-5">
               <div class="products-item-img-btns">
                 <img
                   class="products-item-img"
@@ -612,49 +629,51 @@
       <!-- contacts-section -->
       <section id="contacts-section" class="contacts-section">
         <div class="contacts-container container">
-          <h2 class="contacts-title">Контакты</h2>
-          <div class="contacts-item">
-            <div class="contacts-place-btn">
-              <h4 class="contacts-place">ГЛАВНЫЙ ОФИС</h4>
-              <span class="contacts-tooltip">
-                <button class="contacts-button">?</button>
-                <span class="contacts-tooltip-txt">
-                  Адрес и телефон для корреспонденции, инвесторов. Вопросы о
-                  доставке, качестве обслуживания и товара просьба задавать в
-                  отдел продаж
+          <div class="contacts-main">
+            <h2 class="contacts-title">Контакты</h2>
+            <div class="contacts-item">
+              <div class="contacts-place-btn">
+                <h4 class="contacts-place">ГЛАВНЫЙ ОФИС</h4>
+                <span class="contacts-tooltip">
+                  <button class="contacts-button">?</button>
+                  <span class="contacts-tooltip-txt">
+                    Адрес и телефон для корреспонденции, инвесторов. Вопросы о
+                    доставке, качестве обслуживания и товара просьба задавать в
+                    отдел продаж
+                  </span>
                 </span>
-              </span>
+              </div>
+              <a class="contacts-phone" href="tel:+7 800 789 89 89"
+                >+7 800 789 89 89</a
+              >
+              <p class="contacts-address">
+                г. Санкт-Петербург, Комсомольская, 43 к1
+              </p>
             </div>
-            <a class="contacts-phone" href="tel:+7 800 789 89 89"
-              >+7 800 789 89 89</a
-            >
-            <p class="contacts-address">
-              г. Санкт-Петербург, Комсомольская, 43 к1
-            </p>
-          </div>
-          <div class="contacts-item">
-            <h4 class="contacts-place">ОТДЕЛ ПРОДАЖ</h4>
-            <a class="contacts-phone" href="tel:+7 800 789 89 89"
-              >+7 800 789 89 89</a
-            >
-            <p class="contacts-address">
-              г. Санкт-Петербург, Комсомольская, 43 к1
-            </p>
-          </div>
-          <div class="contacts-icons">
-            <a href="https://m.vk.com/"
-              ><img src="Images/VK.svg" alt="Иконка вконтакте"
-            /></a>
-            <a href="https://www.instagram.com/"
-              ><img src="Images/Instagram.svg" alt="Иконка инсаграма"
-            /></a>
+            <div class="contacts-item">
+              <h4 class="contacts-place">ОТДЕЛ ПРОДАЖ</h4>
+              <a class="contacts-phone" href="tel:+7 800 789 89 89"
+                >+7 800 789 89 89</a
+              >
+              <p class="contacts-address">
+                г. Санкт-Петербург, Комсомольская, 43 к1
+              </p>
+            </div>
+            <div class="contacts-icons">
+              <a href="https://m.vk.com/"
+                ><img src="Images/VK.svg" alt="Иконка вконтакте"
+              /></a>
+              <a href="https://www.instagram.com/"
+                ><img src="Images/Instagram.svg" alt="Иконка инсаграма"
+              /></a>
+            </div>
           </div>
           <div class="contacts-map">
             <script
               type="text/javascript"
               charset="utf-8"
               async
-              src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ad8b11ce81d8d20ef189502bbf3c08d81e69a6c3d923f348d50e2295a0d2cc5f3&amp;width=100%25&amp;height=315&amp;lang=ru_RU&amp;scroll=true"
+              src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ad0a485ba24bfffd72421b2972beab665bfa9b15f29ac4a801d7057db2a38d6c7&amp;width=100%25&amp;height=717&amp;lang=ru_RU&amp;scroll=true"
             ></script>
           </div>
         </div>
@@ -690,6 +709,7 @@
         </div>
       </section>
     </main>
+
     <!-- footer -->
     <footer>
       <div class="footer-logo">

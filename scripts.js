@@ -8,12 +8,25 @@ buttonBurger.addEventListener("click", () => {
 });
 
 const buttonOpenProducts = document.querySelector(".products-button");
-const products = document.querySelectorAll(".products-item-2");
+const products1fr = document.querySelectorAll(".products-item-2");
+const products2fr = document.querySelectorAll(".products-item-3");
+const products3fr = document.querySelectorAll(".products-item-4");
+const products4fr = document.querySelectorAll(".products-item-5");
 
 buttonOpenProducts.addEventListener("click", () => {
-  products.forEach((product) => {
+  products1fr.forEach((product) => {
     product.classList.remove("products-item-2");
   });
+  products2fr.forEach((product) => {
+    product.classList.remove("products-item-3");
+  });
+  products3fr.forEach((product) => {
+    product.classList.remove("products-item-4");
+  });
+  products4fr.forEach((product) => {
+    product.classList.remove("products-item-5");
+  });
+
   buttonOpenProducts.classList.add("products-button-open");
 });
 
@@ -188,12 +201,6 @@ dialogBasket.addEventListener("click", (event) => {
     toggleBasketDialog();
   }
 });
-
-//
-//
-//
-//
-//
 
 const basketItems = []; // Массив для хранения товаров в корзине
 
