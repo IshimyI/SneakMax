@@ -46,7 +46,7 @@ a:active::after {
 
 .container {
   margin-inline: 20px;
-  width: clamp(15rem, -5.682rem + 103.41vw, 71.875rem);
+  width: clamp(17.5rem, -2.273rem + 98.86vw, 71.875rem);
 }
 
 section {
@@ -182,6 +182,10 @@ header {
 
 .dialog-product::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dialog-container {
+  width: 245px;
 }
 
 .dialog-product {
@@ -944,12 +948,12 @@ header {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 280px;
+  width: 300px;
 }
 
 .contacts-map {
-  width: 100%;
-  height: 300px;
+  width: auto;
+  height: auto;
 }
 
 /* cta-section */
@@ -1023,6 +1027,10 @@ footer {
 }
 
 .footer-nav-list {
+  display: none;
+}
+
+.footer-logo {
   display: none;
 }
 
@@ -1168,6 +1176,16 @@ footer {
     letter-spacing: 1.2px;
     opacity: 0.15;
     z-index: 1;
+  }
+
+  .contacts-map {
+    width: 70%;
+    height: auto;
+  }
+
+  .footer-logo {
+    display: block;
+    max-width: 100px;
   }
 }
 
