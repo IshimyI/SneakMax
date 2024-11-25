@@ -227,13 +227,16 @@
       <!-- hero-section -->
       <section id="hero-section" class="hero-section">
         <div class="hero-container container">
-          <h1>Кроссовки известных брендов с доставкой по России и СНГ</h1>
-          <p>
-            Мы продаем кроссовки брендов Nike, Adidas, Puma, Reebok, Converse и
-            многие другие по низким ценам
-          </p>
+          <div class="wrapper">
+            <h1>Кроссовки известных брендов с доставкой по России и СНГ</h1>
+            <p>
+              Мы продаем кроссовки брендов Nike, Adidas, Puma, Reebok, Converse
+              имногие другие по низким ценам
+            </p>
+          </div>
           <button class="hero-button basket-open">Перейти к покупкам</button>
         </div>
+        <span class="hero-hidden-logo">SneakMax</span>
       </section>
 
       <!-- products-section -->
@@ -456,25 +459,27 @@
       <!-- bio-section -->
       <section id="bio-section" class="bio-section">
         <div class="bio-container container">
-          <div class="bio-title"><h2>Пара слов о нас</h2></div>
-          <div class="bio-main">
-            <div class="bio-txt">
-              <p>
-                Спорт держит нас в форме. Учит дисциплине. Объединяет нас. Через
-                спорт мы можем менять жизни. В том числе с помощью
-                воодушевляющих историй спортсменов. Чтобы помочь тебе подняться
-                и двигаться вперед.
-              </p>
-            </div>
-            <div class="bio-logo">
-              <div class="bio-logo-line">
-                <span></span>
+          <div class="wrapper">
+            <div class="bio-title"><h2>Пара слов о нас</h2></div>
+            <div class="bio-main">
+              <div class="bio-txt">
+                <p>
+                  Спорт держит нас в форме. Учит дисциплине. Объединяет нас.
+                  Через спорт мы можем менять жизни. В том числе с помощью
+                  воодушевляющих историй спортсменов. Чтобы помочь тебе
+                  подняться и двигаться вперед.
+                </p>
               </div>
-              <img
-                class="bio-logo-img"
-                src="Images/logo.svg"
-                alt="Лого магазина"
-              />
+              <div class="bio-logo">
+                <div class="bio-logo-line">
+                  <span></span>
+                </div>
+                <img
+                  class="bio-logo-img"
+                  src="Images/logo.svg"
+                  alt="Лого магазина"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -712,7 +717,7 @@
 
     <!-- footer -->
     <footer>
-      <div class="footer-logo">
+      <div class="footer-logo-1">
         <img src="Images/logo.svg" alt="Лого магазина" />
       </div>
       <ul class="footer-nav">
@@ -723,6 +728,26 @@
         <li><a href="#contacts-section">Доставка и оплата</a></li>
         <li><a href="#contacts-section">Контакты</a></li>
       </ul>
+
+      <div class="footer-wrapper"></div>
+      <div class="footer-container container">
+        <div class="footer-logo">
+          <img src="Images/logo.svg" alt="Лого магазина" />
+        </div>
+
+        <div class="footer-wraper-for-nav">
+          <nav>
+            <ul class="footer-nav-list">
+              <li><a href="#products-section">Каталог</a></li>
+              <li><a href="#bio-section">О нас</a></li>
+              <li><a href="#quiz-section">Подбор товара</a></li>
+              <li><a href="#team-section">Наша команда</a></li>
+              <li><a href="#contacts-section">Доставка и оплата</a></li>
+              <li><a href="#contacts-section">Контакты</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
