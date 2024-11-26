@@ -639,12 +639,19 @@ header {
   background-image: url("Images/figure.png");
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
+  position: relative;
 }
 
 .bio-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
+}
+
+.bio-background-man {
+  display: none;
+  z-index: 1;
 }
 
 .bio-title {
@@ -1005,6 +1012,47 @@ header {
   color: white;
 }
 
+/* instagram-section */
+
+.instagram-section {
+  display: none;
+}
+
+.instagram-container {
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 650px;
+}
+
+.instagram-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 100%;
+  height: auto;
+}
+
+.instagram-photo {
+  max-width: 50%;
+  object-fit: cover;
+}
+
+.instagram-main-photos {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+}
+
+.instagram-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* footer */
 
 footer {
@@ -1066,8 +1114,65 @@ footer {
   .products-item-2 {
     display: block;
   }
-}
 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 50%;
+    gap: 20px;
+    z-index: 2;
+  }
+
+  .bio-background-man {
+    display: block;
+    position: relative;
+    height: 100px;
+    width: 100%;
+
+    span {
+      height: 1000px;
+      width: 1000px;
+      background-color: #484283;
+      z-index: 10;
+      position: absolute;
+      transform: rotate(15deg);
+    }
+
+    span:nth-child(2) {
+      top: 50%;
+      translate: -100% -50%;
+      left: 0;
+    }
+
+    span:nth-child(3) {
+      top: 50%;
+      translate: 40% -20%;
+      left: 0;
+      display: none;
+    }
+  }
+
+  .bio-background-man-img {
+    position: absolute;
+    right: -100px;
+    top: -200px;
+  }
+
+  .bio-section {
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+
+  .wrapper-for-sections {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .instagram-section {
+    display: block;
+  }
+}
 /* media - desktop */
 
 @media screen and (width > 1024px) {
@@ -1075,6 +1180,14 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 25px;
+  }
+
+  .bio-background-man {
+    span {
+    }
+    span:nth-child(3) {
+      display: block;
+    }
   }
 
   .products-item-3 {
@@ -1132,13 +1245,6 @@ footer {
   .hero-container {
     padding-top: 30px;
     padding-bottom: 100px;
-  }
-
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    max-width: 50%;
-    gap: 20px;
   }
 
   .faq-section {
