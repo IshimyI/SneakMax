@@ -47,6 +47,7 @@ a:active::after {
 .container {
   margin-inline: 20px;
   width: clamp(17.5rem, -2.273rem + 98.86vw, 71.875rem);
+  position: relative;
 }
 
 section {
@@ -102,6 +103,7 @@ header {
 .header-basket {
   background-color: #484283;
   border: none;
+  position: relative;
 }
 
 .header-container {
@@ -185,7 +187,12 @@ header {
 }
 
 .dialog-container {
-  width: 245px;
+  width: clamp(15.313rem, -3.333rem + 93.23vw, 71.25rem);
+}
+
+.dialog-products-2sides {
+  display: flex;
+  flex-direction: column;
 }
 
 .dialog-product {
@@ -193,7 +200,6 @@ header {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
   min-height: 200px;
   color: #444b58;
 }
@@ -212,16 +218,18 @@ header {
   display: flex;
   position: relative;
   overflow: hidden;
-  width: 235px;
-  height: 235px;
+  width: clamp(14.688rem, -20.734rem + 73.8vw, 30rem);
+  height: 250px;
+  padding-bottom: 100px;
   border-radius: 5px;
+  overflow: hidden;
 }
 
 .big-img {
   position: absolute;
   z-index: -1;
-  width: 240px;
-  height: 200px;
+  width: clamp(14.688rem, -20.734rem + 73.8vw, 30rem);
+  max-height: 300px;
   overflow: hidden;
   object-fit: cover;
   justify-content: center;
@@ -361,12 +369,18 @@ header {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+.dialog-container-basket {
+  width: clamp(14.688rem, 7.727rem + 34.8vw, 30rem);
+}
+
 .dialog-basket {
-  position: fixed;
-  top: 35%;
+  top: 32%;
+
   left: 50%;
+  position: absolute;
   transform: translate(-50%, -50%);
-  width: 100%;
+
+  width: clamp(16.25rem, 8.295rem + 39.77vw, 33.75rem);
   min-height: 100px;
   color: #444b58;
   background-color: #fff;
@@ -389,6 +403,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding-block: 20px;
+  width: 100%;
 }
 
 .basket-sum {
@@ -1102,7 +1117,21 @@ footer {
 
 /* media - pad */
 
-@media screen and (width > 481px) {
+@media screen and (width > 480px) {
+  .dialog-products-2sides {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .dialog-product-left {
+    width: 50%;
+  }
+
+  .dialog-product-right {
+    width: 40%;
+  }
+
   .team-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
