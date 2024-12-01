@@ -51,10 +51,18 @@
             <div class="header-basket">
               <button class="basket-open header-basket">
                 <img src="Images/Vector.svg" alt="Корзина" />
+                <span
+                  id="basket-items-toggle"
+                  class="basket-items-toggle basket-items-disable"
+                  >1</span
+                >
               </button>
               <!-- dialog-basket -->
               <dialog id="dialog-basket" class="dialog-basket">
-                <div class="dialog-container-basket container">
+                <div
+                  id="dialog-container-basket-1"
+                  class="dialog-container-basket container"
+                >
                   <div class="basket-scroll">
                     <div id="basket-items" class="basket-items"></div>
                   </div>
@@ -513,6 +521,7 @@
             Ответьте на три вопроса и мы вышлем каталог с самыми подходящими для
             вас моделями
           </p>
+          <div class="quiz-quiz"></div>
         </div>
       </section>
 

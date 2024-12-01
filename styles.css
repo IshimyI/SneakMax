@@ -106,6 +106,21 @@ header {
   position: relative;
 }
 
+.basket-items-toggle {
+  background-color: #f14f4f;
+  color: #fff;
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+  position: absolute;
+  bottom: -2px;
+  right: -6px;
+}
+
+.basket-items-disable {
+  display: none;
+}
+
 .header-container {
   display: flex;
   flex-direction: row;
@@ -370,14 +385,19 @@ header {
 }
 
 .dialog-container-basket {
-  width: clamp(14.688rem, 7.727rem + 34.8vw, 30rem);
+  width: clamp(13.75rem, 6.364rem + 36.93vw, 30rem);
+  /* width: 100%; */
+}
+
+.dialog-container-basket-hidden {
+  display: none;
 }
 
 .dialog-basket {
   top: 32%;
 
   left: 50%;
-  position: absolute;
+  position: fixed;
   transform: translate(-50%, -50%);
 
   width: clamp(16.25rem, 8.295rem + 39.77vw, 33.75rem);

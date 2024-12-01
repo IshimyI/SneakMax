@@ -177,6 +177,15 @@ smallImgSix.addEventListener("mouseout", () => {
 
 // dialog-basket
 
+const basketItemsToggle = document.getElementById("basket-items-toggle");
+function updateBasketItemsToggle() {
+  if (document.querySelector(".basket-sum-subtitle").textContent > 0) {
+    basketItemsToggle.classList.add("basket-items-disable");
+  } else {
+    basketItemsToggle.classList.remove("basket-items-disable");
+  }
+}
+
 const basketView = document.querySelectorAll(".basket-open");
 const dialogBasket = document.querySelector("#dialog-basket");
 
@@ -216,6 +225,7 @@ function addToBasket(name, image, price) {
   basketItems.push(item); // Добавляем товар в корзину
   renderBasketItems(); // Перерисовываем корзину
   updateBasketSum(); // Обновляем сумму после добавления товара
+  updateBasketItemsToggle();
 }
 
 // Функция отображения всех товаров в корзине
@@ -277,17 +287,20 @@ function removeFromBasket(itemIndex) {
   basketItems.splice(itemIndex, 1); // Удаляем товар из массива
   renderBasketItems(); // Перерисовываем корзину
   updateBasketSum(); // Обновляем сумму после удаления товара
+  updateBasketItemsToggle();
+  if (basketItems.length === 0) {
+    basketItemsToggle.classList.add("basket-items-disable");
+  }
 }
-
 // Функция обновления общей суммы корзины
 function updateBasketSum() {
   const totalSum = basketItems.reduce(
     (sum, item) => sum + parseFloat(item.price),
     0
-  ); // Суммируем цены всех товаров
+  );
+  // Суммируем цены всех товаров
   document.querySelector(".basket-sum-subtitle").textContent = `${totalSum} ₽`; // Обновляем текст суммы
 }
-
 const productsBase = [
   {
     className: ".add-to-cart-1",
@@ -335,3 +348,5 @@ productsBase.forEach((product) => {
     });
   });
 });
+
+// quiz-quiz
