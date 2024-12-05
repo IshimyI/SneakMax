@@ -92,15 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
 const productView = document.querySelectorAll(".product-open");
 const dialogProduct = document.querySelector("#dialog-product");
 
-// Функция для переключения состояния диалога
-function toggleProductDialog() {
-  if (dialogProduct.open) {
-    dialogProduct.close();
-  } else {
-    dialogProduct.showModal();
-  }
-}
-
 productView.forEach((el) => {
   el.addEventListener("click", () => {
     toggleProductDialog();
@@ -114,65 +105,19 @@ dialogProduct.addEventListener("click", (event) => {
   }
 });
 
-const smallImgOne = document.querySelector(".small-img-1");
-const smallImgTwo = document.querySelector(".small-img-2");
-const smallImgThree = document.querySelector(".small-img-3");
-const smallImgFour = document.querySelector(".small-img-4");
-const smallImgFive = document.querySelector(".small-img-5");
-const smallImgSix = document.querySelector(".small-img-6");
+const smallImgs = document.querySelectorAll(".small-img");
+const bigImgs = document.querySelectorAll(".big-img");
 
-const bigImgOne = document.querySelector(".big-img-1");
-const bigImgTwo = document.querySelector(".big-img-2");
-const bigImgThree = document.querySelector(".big-img-3");
-const bigImgFour = document.querySelector(".big-img-4");
-const bigImgFive = document.querySelector(".big-img-5");
-const bigImgSix = document.querySelector(".big-img-6");
+smallImgs.forEach((smallImg, index) => {
+  smallImg.addEventListener("mouseover", () => {
+    bigImgs.forEach((bigImg) => bigImg.classList.remove("big-img-z"));
+    bigImgs[index].classList.add("big-img-z");
+  });
 
-smallImgTwo.addEventListener("mouseover", () => {
-  bigImgOne.classList.remove("big-img-z");
-  bigImgTwo.classList.add("big-img-z");
-});
-
-smallImgTwo.addEventListener("mouseout", () => {
-  bigImgOne.classList.add("big-img-z");
-  bigImgTwo.classList.remove("big-img-z");
-});
-
-smallImgThree.addEventListener("mouseover", () => {
-  bigImgOne.classList.remove("big-img-z");
-  bigImgThree.classList.add("big-img-z");
-});
-
-smallImgThree.addEventListener("mouseout", () => {
-  bigImgOne.classList.add("big-img-z");
-  bigImgThree.classList.remove("big-img-z");
-});
-smallImgFour.addEventListener("mouseover", () => {
-  bigImgOne.classList.remove("big-img-z");
-  bigImgFour.classList.add("big-img-z");
-});
-
-smallImgFour.addEventListener("mouseout", () => {
-  bigImgOne.classList.add("big-img-z");
-  bigImgFour.classList.remove("big-img-z");
-});
-smallImgFive.addEventListener("mouseover", () => {
-  bigImgOne.classList.remove("big-img-z");
-  bigImgFive.classList.add("big-img-z");
-});
-
-smallImgFive.addEventListener("mouseout", () => {
-  bigImgOne.classList.add("big-img-z");
-  bigImgFive.classList.remove("big-img-z");
-});
-smallImgSix.addEventListener("mouseover", () => {
-  bigImgOne.classList.remove("big-img-z");
-  bigImgSix.classList.add("big-img-z");
-});
-
-smallImgSix.addEventListener("mouseout", () => {
-  bigImgOne.classList.add("big-img-z");
-  bigImgSix.classList.remove("big-img-z");
+  smallImg.addEventListener("mouseout", () => {
+    bigImgs.forEach((bigImg) => bigImg.classList.remove("big-img-z"));
+    bigImgs[0].classList.add("big-img-z"); // Возврат к первой картинке
+  });
 });
 
 // dialog-basket
@@ -189,25 +134,44 @@ function updateBasketItemsToggle() {
 const basketView = document.querySelectorAll(".basket-open");
 const dialogBasket = document.querySelector("#dialog-basket");
 
-// Функция для переключения состояния диалога
-function toggleBasketDialog() {
-  if (dialogBasket.open) {
-    dialogBasket.close();
-  } else {
-    dialogBasket.showModal();
-  }
+function toggleDialog(dialog) {
+  dialog.open ? dialog.close() : dialog.showModal();
 }
+
+document.querySelectorAll(".dialog").forEach((dialog) => {
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      toggleDialog(dialog);
+    }
+  });
+});
+
+productView.forEach((el) => {
+  el.addEventListener("click", () => toggleDialog(dialogProduct));
+});
+
+dialogProduct.addEventListener("click", (event) => {
+  if (event.target === dialogProduct) toggleDialog(dialogProduct);
+});
+
+basketView.forEach((el) => {
+  el.addEventListener("click", () => toggleDialog(dialogBasket));
+});
+
+dialogBasket.addEventListener("click", (event) => {
+  if (event.target === dialogBasket) toggleDialog(dialogBasket);
+});
 
 basketView.forEach((el) => {
   el.addEventListener("click", () => {
-    toggleBasketDialog();
+    toggleDialog();
   });
 });
 
 // Закрытие диалога при клике вне его области
 dialogBasket.addEventListener("click", (event) => {
   if (event.target === dialogBasket) {
-    toggleBasketDialog();
+    toggleDialog();
   }
 });
 
@@ -303,58 +267,409 @@ function updateBasketSum() {
 }
 const productsBase = [
   {
+    id: 1,
     className: ".add-to-cart-1",
     name: "Женские кроссовки Puma Force 1 Shadow",
-    image: "Images/foot 2-new.jpeg",
-    price: 11111,
+    price: 10901,
+    discontPrice: 12901,
+    images: [
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+    ],
+    sex: "Женские",
+    size: ["35", "36", "37", "38", "39", "40", "41", "42", "43"],
+    count: 133,
+    rating: 4,
+    description:
+      "Женские кроссовки Puma Force 1 Shadow, с красивой подошвой возрождения и состав в отличие от обычных женских кроссовок на рынке. Подходит для любого возрождения, включая длинные формы и строгие тенденции. Это простой и удобный вариант для любого возрождения.",
+    colors: "Разноцветный",
+    material: ["Кожа", "текстиль", "резина"],
+    country: "Вьетнам",
   },
   {
+    id: 2,
     className: ".add-to-cart-2",
     name: "Кроссовки Nike Air Force 1 '07 QS",
-    image: "Images/foot.jpg",
-    price: 222222,
+    price: 20899,
+    discontPrice: 22899,
+    images: [
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+    ],
+    sex: "Мужские",
+    size: ["35", "36", "37", "38", "39", "40", "41", "42", "43"],
+    count: 244,
+    rating: 4,
+    description:
+      "Кроссовки Nike Air Force 1 '07 QS, с красивой подошвой возрождения и состав в отличие от обычных женских кроссовок на рынке. Подходит для любого возрождения, включая длинные формы и строгие тенденции. Это простой и удобный вариант для любого возрождения.",
+    colors: "Черный",
+    material: ["Кожа", "текстиль", "резина"],
+    country: "Китай",
   },
   {
+    id: 3,
     className: ".add-to-cart-3",
-    name: "Женские кроссовки Puma Force 1 Shadow",
-    image: "Images/foot 2-new.jpeg",
-    price: 333333,
+    name: "Кроссовки Puma RS-X³ Puzzle",
+    price: 14999,
+    discontPrice: 16999,
+    images: [
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+    ],
+    sex: "Унисекс",
+    size: ["36", "38", "40", "42", "44"],
+    count: 150,
+    rating: 4,
+    description:
+      "Кроссовки Puma RS-X³ Puzzle с уникальным дизайном и технологией амортизации RS Foam. Комфорт и стиль для городских приключений.",
+    colors: "Синий",
+    material: ["Текстиль", "резина", "полиуретан"],
+    country: "Вьетнам",
   },
   {
+    id: 4,
     className: ".add-to-cart-4",
-    name: "Кроссовки Nike Air Force 1 '07 QS",
-    image: "Images/foot.jpg",
-    price: 44444,
+    name: "Кроссовки Reebok Zig Kinetica",
+    price: 16999,
+    discontPrice: 18999,
+    images: [
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+    ],
+    sex: "Женские",
+    size: ["36", "37", "38", "39"],
+    count: 80,
+    rating: 4,
+    description:
+      "Reebok Zig Kinetica — инновационные кроссовки с системой амортизации Zig Energy Shell для легкости и динамичного движения.",
+    colors: "Розовый",
+    material: ["Текстиль", "резина"],
+    country: "Камбоджа",
   },
   {
+    id: 5,
     className: ".add-to-cart-5",
-    name: "Женские кроссовки Puma Force 1 Shadow",
-    image: "Images/foot 2-new.jpeg",
-    price: 5555,
+    name: "Кроссовки New Balance 574 Core",
+    price: 13999,
+    discontPrice: 15999,
+    images: [
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+    ],
+    sex: "Унисекс",
+    size: ["35", "36", "37", "38", "40", "42"],
+    count: 210,
+    rating: 4,
+    description:
+      "Классика в каждой детали. New Balance 574 Core сочетают комфорт и долговечность, идеальны для активного образа жизни.",
+    colors: "Серый",
+    material: ["Замша", "текстиль", "резина"],
+    country: "США",
   },
   {
+    id: 6,
     className: ".add-to-cart-6",
-    name: "Кроссовки Nike Air Force 1 '07 QS",
-    image: "Images/foot.jpg",
-    price: 666,
+    name: "Кроссовки Asics Gel-Kayano 28",
+    price: 17999,
+    discontPrice: 19999,
+    images: [
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+    ],
+    sex: "Мужские",
+    size: ["39", "40", "41", "43"],
+    count: 100,
+    rating: 4,
+    description:
+      "Asics Gel-Kayano 28 с усовершенствованной амортизацией и поддержкой стопы. Подходят для долгих тренировок и пробежек.",
+    colors: "Красный",
+    material: ["Синтетика", "резина"],
+    country: "Япония",
+  },
+  {
+    id: 7,
+    className: ".add-to-cart-7",
+    name: "Кроссовки Saucony Shadow 5000",
+    price: 12999,
+    discontPrice: 14999,
+    images: [
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+    ],
+    sex: "Унисекс",
+    size: ["37", "38", "39", "40", "42"],
+    count: 70,
+    rating: 4,
+    description:
+      "Эстетика ретро-дизайна и современные технологии. Saucony Shadow 5000 подойдут для стильного городского образа.",
+    colors: "Зеленый",
+    material: ["Замша", "текстиль", "резина"],
+    country: "Индонезия",
+  },
+  {
+    id: 8,
+    className: ".add-to-cart-8",
+    name: "Кроссовки Vans Old Skool",
+    price: 10999,
+    discontPrice: 12999,
+    images: [
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+    ],
+    sex: "Унисекс",
+    size: ["35", "36", "37", "38"],
+    count: 300,
+    rating: 4,
+    description:
+      "Икона уличного стиля. Vans Old Skool с прочной подошвой и культовым дизайном для повседневного использования.",
+    colors: "Черно-белый",
+    material: ["Хлопок", "резина"],
+    country: "Китай",
+  },
+  {
+    id: 9,
+    className: ".add-to-cart-1",
+    name: "Кроссовки Adidas Ultraboost 22",
+    price: 18999,
+    discontPrice: 20999,
+    images: [
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+    ],
+    sex: "Мужские",
+    size: ["39", "40", "41", "42", "43", "44"],
+    count: 120,
+    rating: 4,
+    description:
+      "Универсальные и стильные кроссовки Adidas Ultraboost 22 с улучшенной амортизацией и дышащим материалом. Идеальны для повседневного использования и занятий спортом.",
+    colors: "Белый",
+    material: ["Текстиль", "резина"],
+    country: "Индонезия",
+  },
+  {
+    id: 10,
+    className: ".add-to-cart-2",
+    name: "Кроссовки Nike Air Max 270",
+    price: 19999,
+    discontPrice: 21999,
+    images: [
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
+      "Images/foot 2-new.jpeg",
+    ],
+    sex: "Женские",
+    size: ["39", "40", "41", "42", "43", "44"],
+    count: 120,
+    rating: 4,
+    description:
+      "Кроссовки Nike Air Max 270 с улучшенной амортизацией и дышащим материалом. Идеальны для повседневного использования и занятий спортом.",
+    colors: "Черный",
+    material: ["Текстиль", "резина"],
+    country: "Китай",
   },
 ];
+
+const productsGrid = document.querySelector(".products-grid");
 
 productsBase.forEach((product) => {
   const elements = document.querySelectorAll(product.className);
   elements.forEach((el) => {
     el.addEventListener("click", () => {
-      addToBasket(product.name, product.image, product.price);
+      addToBasket(product.name, product.images[0], product.price); // Добавление товара в корзину с правильным изображением
     });
   });
 });
+
+productsBase.forEach((product) => {
+  const productElement = document.createElement("div");
+  productElement.classList.add("products-item");
+
+  productElement.innerHTML = `
+    <div class="products-item-img-btns">
+      <img
+        class="products-item-img"
+        src="${product.images[0]}"
+        alt="Картинка ботинка"
+      />
+      <div class="products-item-btns">
+        <button class="products-item-btn product-open">
+          <img
+            class="svg svg-eye"
+            src="Images/Eye.svg"
+            alt="Посмотреть товары"
+          />
+        </button>
+        <button class="products-item-btn">
+          <img
+            class="svg svg-vector ${product.className.replace(".", "")}"
+            src="Images/Vector.svg"
+            alt="Добавить в корзину"
+          />
+        </button>
+      </div>
+    </div>
+    <p class="products-item-info">${product.name} — ${product.price} ₽</p>
+  `;
+
+  // Обработчик клика на кнопку просмотра
+  productElement
+    .querySelector(".product-open")
+    .addEventListener("click", () => {
+      createDialogContent(product); // Передаем объект product
+      toggleDialog(dialogProduct); // Открываем диалог
+    });
+
+  productsGrid.appendChild(productElement);
+});
+
+function createDialogContent(product) {
+  const container = document.querySelector(".dialog-products-2sides");
+
+  // Формируем HTML-структуру
+  const htmlContent = `
+    <div class="dialog-product-left">
+      <div class="big-imgs">
+        ${product.images
+          .map(
+            (img, index) =>
+              `<img class="big-img big-img-${
+                index + 1
+              }" src="${img}" alt="Главное фото ${index + 1}" />`
+          )
+          .join("")}
+      </div>
+      <div class="small-imgs">
+        ${product.images
+          .map(
+            (img, index) =>
+              `<div class="small-img-wrapper">
+                <img class="small-img small-img-${
+                  index + 1
+                }" src="${img}" alt="Доп фото ${index + 1}" />
+              </div>`
+          )
+          .join("")}
+      </div>
+    </div>
+    <div class="dialog-product-right">
+      <div class="dialog-product-header">
+        <div class="number">
+          <span>Артикул:</span>
+          <span>${product.id}</span>
+        </div>
+        <div class="quonity">
+          <span>В наличии:</span>
+          <span>${product.count} шт</span>
+        </div>
+      </div>
+      <div class="dialog-product-title">
+        <p>${product.name}</p>
+      </div>
+      <div class="rating">
+        ${Array.from({ length: 5 })
+          .map(
+            (_, i) =>
+              `<span class="rating-star">${
+                i < product.rating ? "★" : "☆"
+              }</span>`
+          )
+          .join("")}
+      </div>
+      <div class="size-btns">
+        ${product.size
+          .map((size) => `<button class="size-btn">${size}</button>`)
+          .join("")}
+      </div>
+      <div class="prices">
+        <div class="price-sale">${product.price} ₽</div>
+        <div class="price-no-sale">${product.discontPrice} ₽</div>
+      </div>
+      <button class="add-to-cart">Заказать</button>
+      <div class="pluses-delivery">
+        <div class="plus-delivery">
+          ✔︎ <span>Бесплатная доставка до двери</span>
+        </div>
+        <div class="plus-delivery">
+          ✔︎ <span>Оплата заказа при получении</span>
+        </div>
+        <div class="plus-delivery">
+          ✔︎ <span>Обмен в течении двух недель</span>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-product-left">
+      <div class="description">
+        <p class="description-title">Описание</p>
+        <p class="description-main">${product.description}</p>
+      </div>
+    </div>
+    <div class="dialog-product-right">
+      <div class="characteristic">
+        <p class="characteristic-title">Характеристики</p>
+        <div class="characteristic-main">
+          <div class="characteristic-item">
+            <p>Пол: ${product.sex}</p>
+            <p>Цвета: ${product.colors}</p>
+            <p>Состав: ${product.material.join(", ")}</p>
+            <p>Страна: ${product.country}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Вставляем HTML в контейнер
+  container.innerHTML = htmlContent;
+}
+
+// Вызов функции
+createDialogContent(product);
 
 // quiz-quiz
 
 const inputPage1 = document.querySelectorAll(
   '.page-type input[type="checkbox"]'
 );
-const inputPage2 = document.querySelsectorAll(
+const inputPage2 = document.querySelectorAll(
   '.page-size input[type="checkbox"]'
 );
 const inputPage3 = document.querySelector('.page-label input[type="text"]');
@@ -364,6 +679,22 @@ const QuizQuestion2 = document.querySelector(".page-size");
 const QuizQuestion3 = document.querySelector(".page-label");
 const QuizRes = document.querySelector(".quiz-container-result");
 const QuizTitle = document.querySelector(".quiz-container-questions");
+
+const QuizPageForm = document.querySelector(".quiz-page-grid");
+const QuizPage2Form = document.querySelector(".quiz-page-grid-2page");
+const QuizPage3Form = document.querySelector(".quiz-page-label");
+
+QuizPageForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+});
+
+QuizPage2Form.addEventListener("submit", (event) => {
+  event.preventDefault();
+});
+
+QuizPage3Form.addEventListener("submit", (event) => {
+  event.preventDefault();
+});
 
 const QuizNext1 = document.querySelector(".quiz-next-button-btn-1");
 const QuizNext2 = document.querySelector(".quiz-next-button-btn-2");
@@ -384,27 +715,27 @@ function toggleButtonState(button, isEnabled) {
 }
 
 // Для первой страницы
-checkboxesPage1.forEach((checkbox) => {
+inputPage1.forEach((checkbox) => {
   checkbox.addEventListener("change", () => {
-    toggleButtonState(QuizNext1, areCheckboxesChecked(checkboxesPage1));
+    toggleButtonState(QuizNext1, areCheckboxesChecked(inputPage1));
   });
 });
 
 // Для второй страницы
-checkboxesPage2.forEach((checkbox) => {
+inputPage2.forEach((checkbox) => {
   checkbox.addEventListener("change", () => {
-    toggleButtonState(QuizNext2, areCheckboxesChecked(checkboxesPage2));
+    toggleButtonState(QuizNext2, areCheckboxesChecked(inputPage2));
   });
 });
 
 // Для третьей страницы
-textInputPage3.addEventListener("input", () => {
-  toggleButtonState(QuizNext3, isTextInputFilled(textInputPage3));
+inputPage3.addEventListener("input", () => {
+  toggleButtonState(QuizNext3, isTextInputFilled(inputPage3));
 });
 
-QuizNext1.addEventListener("click", () => {
-  if (!areCheckboxesChecked(checkboxesPage1)) {
-    event.preventDefault();
+QuizNext1.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (!areCheckboxesChecked(inputPage1)) {
     alert("Пожалуйста, выберите хотя бы один вариант ответа.");
     return;
   }
@@ -413,9 +744,9 @@ QuizNext1.addEventListener("click", () => {
   QuizTitle.scrollIntoView({ behavior: "smooth" });
 });
 
-QuizNext2.addEventListener("click", () => {
-  if (!areCheckboxesChecked(checkboxesPage2)) {
-    event.preventDefault();
+QuizNext2.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (!areCheckboxesChecked(inputPage2)) {
     alert("Пожалуйста, выберите хотя бы один вариант ответа.");
     return;
   }
@@ -424,9 +755,9 @@ QuizNext2.addEventListener("click", () => {
   QuizTitle.scrollIntoView({ behavior: "smooth" });
 });
 
-QuizNext3.addEventListener("click", () => {
-  if (!isTextInputFilled(textInputPage3)) {
-    event.preventDefault();
+QuizNext3.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (!isTextInputFilled(inputPage3)) {
     alert("Пожалуйста, заполните текстовое поле.");
     return;
   }
