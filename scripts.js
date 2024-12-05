@@ -350,3 +350,88 @@ productsBase.forEach((product) => {
 });
 
 // quiz-quiz
+
+const inputPage1 = document.querySelectorAll(
+  '.page-type input[type="checkbox"]'
+);
+const inputPage2 = document.querySelsectorAll(
+  '.page-size input[type="checkbox"]'
+);
+const inputPage3 = document.querySelector('.page-label input[type="text"]');
+
+const QuizQuestion1 = document.querySelector(".page-type");
+const QuizQuestion2 = document.querySelector(".page-size");
+const QuizQuestion3 = document.querySelector(".page-label");
+const QuizRes = document.querySelector(".quiz-container-result");
+const QuizTitle = document.querySelector(".quiz-container-questions");
+
+const QuizNext1 = document.querySelector(".quiz-next-button-btn-1");
+const QuizNext2 = document.querySelector(".quiz-next-button-btn-2");
+const QuizNext3 = document.querySelector(".quiz-next-button-btn-3");
+
+// Функция проверки состояния чекбоксов
+function areCheckboxesChecked(checkboxes) {
+  return Array.from(checkboxes).some((checkbox) => checkbox.checked);
+}
+
+// Проверка текстового поля
+function isTextInputFilled(input) {
+  return input.value.trim().length > 0;
+}
+
+function toggleButtonState(button, isEnabled) {
+  button.disabled = !isEnabled;
+}
+
+// Для первой страницы
+checkboxesPage1.forEach((checkbox) => {
+  checkbox.addEventListener("change", () => {
+    toggleButtonState(QuizNext1, areCheckboxesChecked(checkboxesPage1));
+  });
+});
+
+// Для второй страницы
+checkboxesPage2.forEach((checkbox) => {
+  checkbox.addEventListener("change", () => {
+    toggleButtonState(QuizNext2, areCheckboxesChecked(checkboxesPage2));
+  });
+});
+
+// Для третьей страницы
+textInputPage3.addEventListener("input", () => {
+  toggleButtonState(QuizNext3, isTextInputFilled(textInputPage3));
+});
+
+QuizNext1.addEventListener("click", () => {
+  if (!areCheckboxesChecked(checkboxesPage1)) {
+    event.preventDefault();
+    alert("Пожалуйста, выберите хотя бы один вариант ответа.");
+    return;
+  }
+  QuizQuestion1.classList.add("quiz-page-hidden");
+  QuizQuestion2.classList.remove("quiz-page-hidden");
+  QuizTitle.scrollIntoView({ behavior: "smooth" });
+});
+
+QuizNext2.addEventListener("click", () => {
+  if (!areCheckboxesChecked(checkboxesPage2)) {
+    event.preventDefault();
+    alert("Пожалуйста, выберите хотя бы один вариант ответа.");
+    return;
+  }
+  QuizQuestion2.classList.add("quiz-page-hidden");
+  QuizQuestion3.classList.remove("quiz-page-hidden");
+  QuizTitle.scrollIntoView({ behavior: "smooth" });
+});
+
+QuizNext3.addEventListener("click", () => {
+  if (!isTextInputFilled(textInputPage3)) {
+    event.preventDefault();
+    alert("Пожалуйста, заполните текстовое поле.");
+    return;
+  }
+  QuizQuestion3.classList.add("quiz-page-hidden");
+  QuizTitle.classList.add("quiz-page-hidden");
+  QuizRes.classList.remove("quiz-page-hidden");
+  QuizTitle.scrollIntoView({ behavior: "smooth" });
+});
