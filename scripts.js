@@ -475,7 +475,7 @@ products.forEach((product, index) => {
 
 // #endregion
 
-// #region  products-btn
+// #regionproducts-btn
 
 const buttonOpenProducts = document.querySelector(".products-button");
 const productHidden2 = document.querySelector(".products-item-2");
@@ -494,12 +494,12 @@ buttonOpenProducts.addEventListener("click", () => {
 
 // #endregion
 
-// #region dialogs
+// #region dialog-product
+
 const productBtn = document.querySelectorAll(".product-open");
 const dialogProduct = document.getElementById("dialog-product");
-const dialogProductInput = document.querySelector(".dialog-products-2sides");
 
-function toggleDialog() {
+function toggleDialogProduct() {
   if (dialogProduct.open) {
     dialogProduct.close();
   } else {
@@ -509,13 +509,13 @@ function toggleDialog() {
 
 // Открытие диалога при нажатии на кнопку
 productBtn.forEach((el) => {
-  el.addEventListener("click", toggleDialog);
+  el.addEventListener("click", toggleDialogProduct);
 });
 
 // Закрытие диалога при клике вне его области
 dialogProduct.addEventListener("click", (event) => {
   if (event.target === dialogProduct) {
-    toggleDialog();
+    toggleDialogProduct();
   }
 });
 
@@ -528,7 +528,8 @@ productBtn.forEach((el) => {
       console.error(`Продукт с ID ${id} не найден`);
       return;
     }
-    dialogProductInput.innerHTML = `
+    dialogProduct.innerHTML = `
+        <div class="dialog-products-2sides">
         <div class="dialog-product-left">
       <div class="big-imgs">
         ${product.images
@@ -599,6 +600,8 @@ productBtn.forEach((el) => {
         </div>
       </div>
     </div>
+  </div>
+  <div class="dialog-products-2sides">
     <div class="dialog-product-left">
       <div class="description">
         <p class="description-title">Описание</p>
@@ -618,30 +621,43 @@ productBtn.forEach((el) => {
         </div>
       </div>
     </div>
+  </div>
     `;
   });
-  console.log("диалог продукты", dialogProduct);
   dialogProduct.showModal();
-});
-
-const btnBasket = document.querySelectorAll(".basket-open");
-const dialogBasket = document.querySelector("#dialog-basket");
-
-btnBasket.forEach((el) => {
-  el.addEventListener("click", () => {
-    dialogBasket.showModal();
-  });
 });
 
 dialogProduct.close();
 
 // #endregion
 
-// #region dialog-product
-
-// #endregion
-
 // #region dialog-basket
+
+const btnBasket = document.querySelectorAll(".basket-open");
+const dialogBasket = document.getElementById("dialog-basket");
+const addToBasket = document.querySelectorAll(".add-to-cart");
+
+function toggleDialogBasket() {
+  if (dialogBasket.open) {
+    dialogBasket.close();
+  } else {
+    dialogBasket.showModal();
+  }
+}
+
+// Открытие диалога при нажатии на кнопку
+btnBasket.forEach((el) => {
+  el.addEventListener("click", toggleDialogBasket);
+});
+
+// Закрытие диалога при клике вне его области
+dialogBasket.addEventListener("click", (event) => {
+  if (event.target === dialogBasket) {
+    toggleDialogBasket();
+  }
+});
+
+dialogBasket.close();
 
 // #endregion
 
@@ -666,13 +682,13 @@ dialogProduct.close();
 // document.querySelectorAll(".dialog").forEach((dialog) => {
 //   dialog.addEventListener("click", (event) => {
 //     if (event.target === dialog) {
-//       toggleDialog(dialog);
+//       toggleDialogProduct(dialog);
 //     }
 //   });
 // });
 
 // basketView.forEach((el) => {
-//   el.addEventListener("click", () => toggleDialog(dialogBasket));
+//   el.addEventListener("click", () => toggleDialogProduct(dialogBasket));
 // });
 
 // // Функция отображения всех товаров в корзине
