@@ -636,6 +636,7 @@ dialogProduct.close();
 const btnBasket = document.querySelectorAll(".basket-open");
 const dialogBasket = document.getElementById("dialog-basket");
 const addToBasket = document.querySelectorAll(".add-to-cart");
+const basket = [];
 
 function toggleDialogBasket() {
   if (dialogBasket.open) {
@@ -657,18 +658,15 @@ dialogBasket.addEventListener("click", (event) => {
   }
 });
 
+addToBasket.forEach((el) => {
+  el.addEventListener("click", () => {});
+});
+
 dialogBasket.close();
 
 // #endregion
 
 // lkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmm
-
-// dialog-product
-
-// const basketItems = []; // Массив для хранения товаров в корзине
-
-// const basketView = document.querySelectorAll(".basket-open");
-// const dialogBasket = document.querySelector("#dialog-basket");
 
 // const basketItemsToggle = document.getElementById("basket-items-toggle");
 // function updateBasketItemsToggle() {
