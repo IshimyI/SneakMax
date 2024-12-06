@@ -497,7 +497,7 @@ buttonOpenProducts.addEventListener("click", () => {
 // #region dialogs
 const productBtn = document.querySelectorAll(".product-open");
 const dialogProduct = document.getElementById("dialog-product");
-console.log("диалог продукты", dialogProduct);
+const dialogProductInput = document.querySelector(".dialog-products-2sides");
 
 function toggleDialog() {
   if (dialogProduct.open) {
@@ -521,13 +521,103 @@ dialogProduct.addEventListener("click", (event) => {
 
 productBtn.forEach((el) => {
   el.addEventListener("click", () => {
-    const id = el.dataset.id;
-    dialogProduct.innerHTML = `
+    const id = parseInt(el.dataset.id, 10); // Получаем ID из data-атрибута кнопки
+    const product = products.find((item) => item.id === id); // Находим товар по ID
 
-
-// !!! Подсказка по каждому товару
-
-
+    if (!product) {
+      console.error(`Продукт с ID ${id} не найден`);
+      return;
+    }
+    dialogProductInput.innerHTML = `
+        <div class="dialog-product-left">
+      <div class="big-imgs">
+        ${product.images
+          .map(
+            (img, index) =>
+              `<img class="big-img big-img-${
+                index + 1
+              }" src="${img}" alt="Главное фото ${index + 1}" />`
+          )
+          .join("")}
+      </div>
+      <div class="small-imgs">
+        ${product.images
+          .map(
+            (img, index) =>
+              `<div class="small-img-wrapper">
+                <img class="small-img small-img-${
+                  index + 1
+                }" src="${img}" alt="Доп фото ${index + 1}" />
+              </div>`
+          )
+          .join("")}
+      </div>
+    </div>
+    <div class="dialog-product-right">
+      <div class="dialog-product-header">
+        <div class="number">
+          <span>Артикул:</span>
+          <span>${product.id}</span>
+        </div>
+        <div class="quonity">
+          <span>В наличии:</span>
+          <span>${product.count} шт</span>
+        </div>
+      </div>
+      <div class="dialog-product-title">
+        <p>${product.name}</p>
+      </div>
+      <div class="rating">
+        ${Array.from({ length: 5 })
+          .map(
+            (_, i) =>
+              `<span class="rating-star">${
+                i < product.rating ? "★" : "☆"
+              }</span>`
+          )
+          .join("")}
+      </div>
+      <div class="size-btns">
+        ${product.size
+          .map((size) => `<button class="size-btn">${size}</button>`)
+          .join("")}
+      </div>
+      <div class="prices">
+        <div class="price-sale">${product.price} ₽</div>
+        <div class="price-no-sale">${product.discontPrice} ₽</div>
+      </div>
+      <button class="add-to-cart">Заказать</button>
+      <div class="pluses-delivery">
+        <div class="plus-delivery">
+          ✔︎ <span>Бесплатная доставка до двери</span>
+        </div>
+        <div class="plus-delivery">
+          ✔︎ <span>Оплата заказа при получении</span>
+        </div>
+        <div class="plus-delivery">
+          ✔︎ <span>Обмен в течении двух недель</span>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-product-left">
+      <div class="description">
+        <p class="description-title">Описание</p>
+        <p class="description-main">${product.description}</p>
+      </div>
+    </div>
+    <div class="dialog-product-right">
+      <div class="characteristic">
+        <p class="characteristic-title">Характеристики</p>
+        <div class="characteristic-main">
+          <div class="characteristic-item">
+            <p>Пол: ${product.sex}</p>
+            <p>Цвета: ${product.colors}</p>
+            <p>Состав: ${product.material.join(", ")}</p>
+            <p>Страна: ${product.country}</p>
+          </div>
+        </div>
+      </div>
+    </div>
     `;
   });
   console.log("диалог продукты", dialogProduct);
@@ -542,6 +632,8 @@ btnBasket.forEach((el) => {
     dialogBasket.showModal();
   });
 });
+
+dialogProduct.close();
 
 // #endregion
 
