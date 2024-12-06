@@ -1,3 +1,5 @@
+// #region burger-menu
+
 const buttonBurger = document.querySelector(".burger");
 const menuBurger = document.querySelector(".burger-menu");
 
@@ -7,28 +9,109 @@ buttonBurger.addEventListener("click", () => {
   document.body.classList.toggle("no-scroll");
 });
 
-const buttonOpenProducts = document.querySelector(".products-button");
-const products1fr = document.querySelectorAll(".products-item-2");
-const products2fr = document.querySelectorAll(".products-item-3");
-const products3fr = document.querySelectorAll(".products-item-4");
-const products4fr = document.querySelectorAll(".products-item-5");
+// #endregion
 
-buttonOpenProducts.addEventListener("click", () => {
-  products1fr.forEach((product) => {
-    product.classList.remove("products-item-2");
-  });
-  products2fr.forEach((product) => {
-    product.classList.remove("products-item-3");
-  });
-  products3fr.forEach((product) => {
-    product.classList.remove("products-item-4");
-  });
-  products4fr.forEach((product) => {
-    product.classList.remove("products-item-5");
-  });
+// #region quiz
 
-  buttonOpenProducts.classList.add("products-button-open");
+const inputPage1 = document.querySelectorAll(
+  '.page-type input[type="checkbox"]'
+);
+const inputPage2 = document.querySelectorAll(
+  '.page-size input[type="checkbox"]'
+);
+const inputPage3 = document.querySelector('.page-label input[type="text"]');
+
+const QuizQuestion1 = document.querySelector(".page-type");
+const QuizQuestion2 = document.querySelector(".page-size");
+const QuizQuestion3 = document.querySelector(".page-label");
+const QuizRes = document.querySelector(".quiz-container-result");
+const QuizTitle = document.querySelector(".quiz-container-questions");
+
+const QuizPageForm = document.querySelector(".quiz-page-grid");
+const QuizPage2Form = document.querySelector(".quiz-page-grid-2page");
+const QuizPage3Form = document.querySelector(".quiz-page-label");
+
+QuizPageForm.addEventListener("submit", (event) => {
+  event.preventDefault();
 });
+
+QuizPage2Form.addEventListener("submit", (event) => {
+  event.preventDefault();
+});
+
+QuizPage3Form.addEventListener("submit", (event) => {
+  event.preventDefault();
+});
+
+const QuizNext1 = document.querySelector(".quiz-next-button-btn-1");
+const QuizNext2 = document.querySelector(".quiz-next-button-btn-2");
+const QuizNext3 = document.querySelector(".quiz-next-button-btn-3");
+
+function areCheckboxesChecked(checkboxes) {
+  return Array.from(checkboxes).some((checkbox) => checkbox.checked);
+}
+
+function isTextInputFilled(input) {
+  return input.value.trim().length > 0;
+}
+
+function toggleButtonState(button, isEnabled) {
+  button.disabled = !isEnabled;
+}
+
+inputPage1.forEach((checkbox) => {
+  checkbox.addEventListener("change", () => {
+    toggleButtonState(QuizNext1, areCheckboxesChecked(inputPage1));
+  });
+});
+
+inputPage2.forEach((checkbox) => {
+  checkbox.addEventListener("change", () => {
+    toggleButtonState(QuizNext2, areCheckboxesChecked(inputPage2));
+  });
+});
+
+inputPage3.addEventListener("input", () => {
+  toggleButtonState(QuizNext3, isTextInputFilled(inputPage3));
+});
+
+QuizNext1.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (!areCheckboxesChecked(inputPage1)) {
+    alert("Пожалуйста, выберите хотя бы один вариант ответа.");
+    return;
+  }
+  QuizQuestion1.classList.add("quiz-page-hidden");
+  QuizQuestion2.classList.remove("quiz-page-hidden");
+  QuizTitle.scrollIntoView({ behavior: "smooth" });
+});
+
+QuizNext2.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (!areCheckboxesChecked(inputPage2)) {
+    alert("Пожалуйста, выберите хотя бы один вариант ответа.");
+    return;
+  }
+  QuizQuestion2.classList.add("quiz-page-hidden");
+  QuizQuestion3.classList.remove("quiz-page-hidden");
+  QuizTitle.scrollIntoView({ behavior: "smooth" });
+});
+
+QuizNext3.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (!isTextInputFilled(inputPage3)) {
+    alert("Пожалуйста, заполните текстовое поле.");
+    return;
+  }
+  QuizQuestion3.classList.add("quiz-page-hidden");
+  QuizTitle.classList.add("quiz-page-hidden");
+  QuizRes.classList.remove("quiz-page-hidden");
+  QuizTitle.scrollIntoView({ behavior: "smooth" });
+});
+
+// #endregion
+
+// #region faq
 
 const buttonFaq1 = document.querySelector(".faq-button-1");
 const buttonFaq2 = document.querySelector(".faq-button-2");
@@ -46,7 +129,12 @@ buttonFaq2.addEventListener("click", () => {
   buttonFaq2.classList.toggle("faq-button-open");
 });
 
+// #endregion
+
+// #region cta
+
 const ctaForm = document.querySelector("#cta-form");
+
 ctaForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const formData = new FormData(ctaForm);
@@ -87,185 +175,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// dialog-product
+// #endregion
 
-const productView = document.querySelectorAll(".product-open");
-const dialogProduct = document.querySelector("#dialog-product");
+// #region products
 
-productView.forEach((el) => {
-  el.addEventListener("click", () => {
-    toggleProductDialog();
-  });
-});
-
-// Закрытие диалога при клике вне его области
-dialogProduct.addEventListener("click", (event) => {
-  if (event.target === dialogProduct) {
-    toggleProductDialog();
-  }
-});
-
-const smallImgs = document.querySelectorAll(".small-img");
-const bigImgs = document.querySelectorAll(".big-img");
-
-smallImgs.forEach((smallImg, index) => {
-  smallImg.addEventListener("mouseover", () => {
-    bigImgs.forEach((bigImg) => bigImg.classList.remove("big-img-z"));
-    bigImgs[index].classList.add("big-img-z");
-  });
-
-  smallImg.addEventListener("mouseout", () => {
-    bigImgs.forEach((bigImg) => bigImg.classList.remove("big-img-z"));
-    bigImgs[0].classList.add("big-img-z"); // Возврат к первой картинке
-  });
-});
-
-// dialog-basket
-
-const basketItemsToggle = document.getElementById("basket-items-toggle");
-function updateBasketItemsToggle() {
-  if (document.querySelector(".basket-sum-subtitle").textContent > 0) {
-    basketItemsToggle.classList.add("basket-items-disable");
-  } else {
-    basketItemsToggle.classList.remove("basket-items-disable");
-  }
-}
-
-const basketView = document.querySelectorAll(".basket-open");
-const dialogBasket = document.querySelector("#dialog-basket");
-
-function toggleDialog(dialog) {
-  dialog.open ? dialog.close() : dialog.showModal();
-}
-
-document.querySelectorAll(".dialog").forEach((dialog) => {
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) {
-      toggleDialog(dialog);
-    }
-  });
-});
-
-productView.forEach((el) => {
-  el.addEventListener("click", () => toggleDialog(dialogProduct));
-});
-
-dialogProduct.addEventListener("click", (event) => {
-  if (event.target === dialogProduct) toggleDialog(dialogProduct);
-});
-
-basketView.forEach((el) => {
-  el.addEventListener("click", () => toggleDialog(dialogBasket));
-});
-
-dialogBasket.addEventListener("click", (event) => {
-  if (event.target === dialogBasket) toggleDialog(dialogBasket);
-});
-
-basketView.forEach((el) => {
-  el.addEventListener("click", () => {
-    toggleDialog();
-  });
-});
-
-// Закрытие диалога при клике вне его области
-dialogBasket.addEventListener("click", (event) => {
-  if (event.target === dialogBasket) {
-    toggleDialog();
-  }
-});
-
-const basketItems = []; // Массив для хранения товаров в корзине
-
-// Функция добавления товара в корзину
-function addToBasket(name, image, price) {
-  const item = {
-    id: Date.now(), // Уникальный id для каждого товара, основанный на текущем времени
-    name,
-    image,
-    price,
-  };
-
-  basketItems.push(item); // Добавляем товар в корзину
-  renderBasketItems(); // Перерисовываем корзину
-  updateBasketSum(); // Обновляем сумму после добавления товара
-  updateBasketItemsToggle();
-}
-
-// Функция отображения всех товаров в корзине
-function renderBasketItems() {
-  const basketItemsContainer = document.getElementById("basket-items");
-  basketItemsContainer.innerHTML = ""; // Очистка контейнера перед рендером
-
-  // Создаем HTML для каждого товара в корзине
-  basketItems.forEach((item, index) => {
-    const itemElement = document.createElement("div");
-    itemElement.classList.add("basket-item");
-
-    itemElement.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" class="basket-item-image">
-      <div class="basket-item-info">
-        <p class="basket-item-name">${item.name}</p>
-        <p class="basket-item-price">${item.price} ₽</p>
-      </div>
-      <button class="basket-item-delete" data-id="${item.id}" data-index="${index}">
-       <img src="Images/trash.svg" alt="Удалить" />
-      </button>
-    `;
-
-    // Добавляем товар в корзину
-    basketItemsContainer.appendChild(itemElement);
-  });
-
-  // Привязываем обработчики событий для кнопок "Удалить"
-  attachDeleteEventListeners(); // Привязываем события удаления
-}
-
-// Функция прикрепления обработчиков событий кнопок "Удалить"
-function attachDeleteEventListeners() {
-  // Находим все кнопки удаления и добавляем обработчик события
-  document.querySelectorAll(".basket-item-delete").forEach((button) => {
-    button.addEventListener("click", function (event) {
-      // Используем event.currentTarget для получения данных с самой кнопки
-      const itemId = parseInt(event.currentTarget.getAttribute("data-id"), 10); // Получаем id товара
-      const itemIndex = parseInt(
-        event.currentTarget.getAttribute("data-index"),
-        10
-      ); // Получаем индекс товара
-
-      // Проверяем, что id корректный
-      if (!isNaN(itemId) && !isNaN(itemIndex)) {
-        removeFromBasket(itemIndex); // Удаляем товар по индексу
-      } else {
-        console.error("Ошибка: Некорректный itemId или itemIndex");
-      }
-    });
-  });
-}
-
-// Функция удаления товара из корзины
-function removeFromBasket(itemIndex) {
-  console.log("Удаляем товар с индексом:", itemIndex);
-
-  // Удаляем товар из массива по индексу
-  basketItems.splice(itemIndex, 1); // Удаляем товар из массива
-  renderBasketItems(); // Перерисовываем корзину
-  updateBasketSum(); // Обновляем сумму после удаления товара
-  updateBasketItemsToggle();
-  if (basketItems.length === 0) {
-    basketItemsToggle.classList.add("basket-items-disable");
-  }
-}
-// Функция обновления общей суммы корзины
-function updateBasketSum() {
-  const totalSum = basketItems.reduce(
-    (sum, item) => sum + parseFloat(item.price),
-    0
-  );
-  // Суммируем цены всех товаров
-  document.querySelector(".basket-sum-subtitle").textContent = `${totalSum} ₽`; // Обновляем текст суммы
-}
-const productsBase = [
+const products = [
   {
     id: 1,
     className: ".add-to-cart-1",
@@ -508,20 +422,25 @@ const productsBase = [
   },
 ];
 
+// #endregion
+
+// #region products-section
+
 const productsGrid = document.querySelector(".products-grid");
 
-productsBase.forEach((product) => {
-  const elements = document.querySelectorAll(product.className);
-  elements.forEach((el) => {
-    el.addEventListener("click", () => {
-      addToBasket(product.name, product.images[0], product.price); // Добавление товара в корзину с правильным изображением
-    });
-  });
-});
-
-productsBase.forEach((product) => {
+products.forEach((product, index) => {
   const productElement = document.createElement("div");
   productElement.classList.add("products-item");
+
+  if (index === 1) {
+    productElement.classList.add("products-item-2");
+  }
+  if (index === 2) {
+    productElement.classList.add("products-item-3");
+  }
+  if (index > 2) {
+    productElement.classList.add("products-item-4");
+  }
 
   productElement.innerHTML = `
     <div class="products-item-img-btns">
@@ -531,7 +450,7 @@ productsBase.forEach((product) => {
         alt="Картинка ботинка"
       />
       <div class="products-item-btns">
-        <button class="products-item-btn product-open">
+        <button class="products-item-btn product-open" data-id="${product.id}">
           <img
             class="svg svg-eye"
             src="Images/Eye.svg"
@@ -547,222 +466,180 @@ productsBase.forEach((product) => {
         </button>
       </div>
     </div>
-    <p class="products-item-info">${product.name} — ${product.price} ₽</p>
+    <p class="products-item-info">${product.name}</p>
+    <p class="products-item-price">${product.price} р</p>
   `;
-
-  // Обработчик клика на кнопку просмотра
-  productElement
-    .querySelector(".product-open")
-    .addEventListener("click", () => {
-      createDialogContent(product); // Передаем объект product
-      toggleDialog(dialogProduct); // Открываем диалог
-    });
 
   productsGrid.appendChild(productElement);
 });
 
-function createDialogContent(product) {
-  const container = document.querySelector(".dialog-products-2sides");
+// #endregion
 
-  // Формируем HTML-структуру
-  const htmlContent = `
-    <div class="dialog-product-left">
-      <div class="big-imgs">
-        ${product.images
-          .map(
-            (img, index) =>
-              `<img class="big-img big-img-${
-                index + 1
-              }" src="${img}" alt="Главное фото ${index + 1}" />`
-          )
-          .join("")}
-      </div>
-      <div class="small-imgs">
-        ${product.images
-          .map(
-            (img, index) =>
-              `<div class="small-img-wrapper">
-                <img class="small-img small-img-${
-                  index + 1
-                }" src="${img}" alt="Доп фото ${index + 1}" />
-              </div>`
-          )
-          .join("")}
-      </div>
-    </div>
-    <div class="dialog-product-right">
-      <div class="dialog-product-header">
-        <div class="number">
-          <span>Артикул:</span>
-          <span>${product.id}</span>
-        </div>
-        <div class="quonity">
-          <span>В наличии:</span>
-          <span>${product.count} шт</span>
-        </div>
-      </div>
-      <div class="dialog-product-title">
-        <p>${product.name}</p>
-      </div>
-      <div class="rating">
-        ${Array.from({ length: 5 })
-          .map(
-            (_, i) =>
-              `<span class="rating-star">${
-                i < product.rating ? "★" : "☆"
-              }</span>`
-          )
-          .join("")}
-      </div>
-      <div class="size-btns">
-        ${product.size
-          .map((size) => `<button class="size-btn">${size}</button>`)
-          .join("")}
-      </div>
-      <div class="prices">
-        <div class="price-sale">${product.price} ₽</div>
-        <div class="price-no-sale">${product.discontPrice} ₽</div>
-      </div>
-      <button class="add-to-cart">Заказать</button>
-      <div class="pluses-delivery">
-        <div class="plus-delivery">
-          ✔︎ <span>Бесплатная доставка до двери</span>
-        </div>
-        <div class="plus-delivery">
-          ✔︎ <span>Оплата заказа при получении</span>
-        </div>
-        <div class="plus-delivery">
-          ✔︎ <span>Обмен в течении двух недель</span>
-        </div>
-      </div>
-    </div>
-    <div class="dialog-product-left">
-      <div class="description">
-        <p class="description-title">Описание</p>
-        <p class="description-main">${product.description}</p>
-      </div>
-    </div>
-    <div class="dialog-product-right">
-      <div class="characteristic">
-        <p class="characteristic-title">Характеристики</p>
-        <div class="characteristic-main">
-          <div class="characteristic-item">
-            <p>Пол: ${product.sex}</p>
-            <p>Цвета: ${product.colors}</p>
-            <p>Состав: ${product.material.join(", ")}</p>
-            <p>Страна: ${product.country}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
+// #region  products-btn
 
-  // Вставляем HTML в контейнер
-  container.innerHTML = htmlContent;
-}
+const buttonOpenProducts = document.querySelector(".products-button");
+const productHidden2 = document.querySelector(".products-item-2");
+const productHidden3 = document.querySelector(".products-item-3");
+const productHidden4 = document.querySelectorAll(".products-item-4");
 
-// Вызов функции
-createDialogContent(product);
+buttonOpenProducts.addEventListener("click", () => {
+  productHidden2.classList.remove("products-item-2");
+  productHidden3.classList.remove("products-item-3");
+  productHidden4.forEach((product) => {
+    product.classList.remove("products-item-4");
+  });
 
-// quiz-quiz
-
-const inputPage1 = document.querySelectorAll(
-  '.page-type input[type="checkbox"]'
-);
-const inputPage2 = document.querySelectorAll(
-  '.page-size input[type="checkbox"]'
-);
-const inputPage3 = document.querySelector('.page-label input[type="text"]');
-
-const QuizQuestion1 = document.querySelector(".page-type");
-const QuizQuestion2 = document.querySelector(".page-size");
-const QuizQuestion3 = document.querySelector(".page-label");
-const QuizRes = document.querySelector(".quiz-container-result");
-const QuizTitle = document.querySelector(".quiz-container-questions");
-
-const QuizPageForm = document.querySelector(".quiz-page-grid");
-const QuizPage2Form = document.querySelector(".quiz-page-grid-2page");
-const QuizPage3Form = document.querySelector(".quiz-page-label");
-
-QuizPageForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+  buttonOpenProducts.classList.add("products-button-open");
 });
 
-QuizPage2Form.addEventListener("submit", (event) => {
-  event.preventDefault();
+// #endregion
+
+// #region dialogs
+const productBtn = document.querySelectorAll(".product-open");
+const dialogProduct = document.getElementById("dialog-product");
+console.log("диалог продукты", dialogProduct);
+
+function toggleDialog() {
+  if (dialogProduct.open) {
+    dialogProduct.close();
+  } else {
+    dialogProduct.showModal();
+  }
+}
+
+// Открытие диалога при нажатии на кнопку
+productBtn.forEach((el) => {
+  el.addEventListener("click", toggleDialog);
 });
 
-QuizPage3Form.addEventListener("submit", (event) => {
-  event.preventDefault();
+// Закрытие диалога при клике вне его области
+dialogProduct.addEventListener("click", (event) => {
+  if (event.target === dialogProduct) {
+    toggleDialog();
+  }
 });
 
-const QuizNext1 = document.querySelector(".quiz-next-button-btn-1");
-const QuizNext2 = document.querySelector(".quiz-next-button-btn-2");
-const QuizNext3 = document.querySelector(".quiz-next-button-btn-3");
+productBtn.forEach((el) => {
+  el.addEventListener("click", () => {
+    const id = el.dataset.id;
+    dialogProduct.innerHTML = `
 
-// Функция проверки состояния чекбоксов
-function areCheckboxesChecked(checkboxes) {
-  return Array.from(checkboxes).some((checkbox) => checkbox.checked);
-}
 
-// Проверка текстового поля
-function isTextInputFilled(input) {
-  return input.value.trim().length > 0;
-}
+// !!! Подсказка по каждому товару
 
-function toggleButtonState(button, isEnabled) {
-  button.disabled = !isEnabled;
-}
 
-// Для первой страницы
-inputPage1.forEach((checkbox) => {
-  checkbox.addEventListener("change", () => {
-    toggleButtonState(QuizNext1, areCheckboxesChecked(inputPage1));
+    `;
+  });
+  console.log("диалог продукты", dialogProduct);
+  dialogProduct.showModal();
+});
+
+const btnBasket = document.querySelectorAll(".basket-open");
+const dialogBasket = document.querySelector("#dialog-basket");
+
+btnBasket.forEach((el) => {
+  el.addEventListener("click", () => {
+    dialogBasket.showModal();
   });
 });
 
-// Для второй страницы
-inputPage2.forEach((checkbox) => {
-  checkbox.addEventListener("change", () => {
-    toggleButtonState(QuizNext2, areCheckboxesChecked(inputPage2));
-  });
-});
+// #endregion
 
-// Для третьей страницы
-inputPage3.addEventListener("input", () => {
-  toggleButtonState(QuizNext3, isTextInputFilled(inputPage3));
-});
+// #region dialog-product
 
-QuizNext1.addEventListener("click", (event) => {
-  event.preventDefault();
-  if (!areCheckboxesChecked(inputPage1)) {
-    alert("Пожалуйста, выберите хотя бы один вариант ответа.");
-    return;
-  }
-  QuizQuestion1.classList.add("quiz-page-hidden");
-  QuizQuestion2.classList.remove("quiz-page-hidden");
-  QuizTitle.scrollIntoView({ behavior: "smooth" });
-});
+// #endregion
 
-QuizNext2.addEventListener("click", (event) => {
-  event.preventDefault();
-  if (!areCheckboxesChecked(inputPage2)) {
-    alert("Пожалуйста, выберите хотя бы один вариант ответа.");
-    return;
-  }
-  QuizQuestion2.classList.add("quiz-page-hidden");
-  QuizQuestion3.classList.remove("quiz-page-hidden");
-  QuizTitle.scrollIntoView({ behavior: "smooth" });
-});
+// #region dialog-basket
 
-QuizNext3.addEventListener("click", (event) => {
-  event.preventDefault();
-  if (!isTextInputFilled(inputPage3)) {
-    alert("Пожалуйста, заполните текстовое поле.");
-    return;
-  }
-  QuizQuestion3.classList.add("quiz-page-hidden");
-  QuizTitle.classList.add("quiz-page-hidden");
-  QuizRes.classList.remove("quiz-page-hidden");
-  QuizTitle.scrollIntoView({ behavior: "smooth" });
-});
+// #endregion
+
+// lkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmm
+
+// dialog-product
+
+// const basketItems = []; // Массив для хранения товаров в корзине
+
+// const basketView = document.querySelectorAll(".basket-open");
+// const dialogBasket = document.querySelector("#dialog-basket");
+
+// const basketItemsToggle = document.getElementById("basket-items-toggle");
+// function updateBasketItemsToggle() {
+//   if (document.querySelector(".basket-sum-subtitle").textContent > 0) {
+//     basketItemsToggle.classList.add("basket-items-disable");
+//   } else {
+//     basketItemsToggle.classList.remove("basket-items-disable");
+//   }
+// }
+
+// document.querySelectorAll(".dialog").forEach((dialog) => {
+//   dialog.addEventListener("click", (event) => {
+//     if (event.target === dialog) {
+//       toggleDialog(dialog);
+//     }
+//   });
+// });
+
+// basketView.forEach((el) => {
+//   el.addEventListener("click", () => toggleDialog(dialogBasket));
+// });
+
+// // Функция отображения всех товаров в корзине
+// function renderBasketItems() {
+//   const basketItemsContainer = document.getElementById("basket-items");
+//   basketItemsContainer.innerHTML = ""; // Очистка контейнера перед рендером
+
+//   // Создаем HTML для каждого товара в корзине
+//   basketItems.forEach((item, index) => {
+//     const itemElement = document.createElement("div");
+//     itemElement.classList.add("basket-item");
+
+//     itemElement.innerHTML = `
+//       <img src="${item.image}" alt="${item.name}" class="basket-item-image">
+//       <div class="basket-item-info">
+//         <p class="basket-item-name">${item.name}</p>
+//         <p class="basket-item-price">${item.price} ₽</p>
+//       </div>
+//       <button class="basket-item-delete" data-id="${item.id}" data-index="${index}">
+//        <img src="Images/trash.svg" alt="Удалить" />
+//       </button>
+//     `;
+
+//     // Добавляем товар в корзину
+//     basketItemsContainer.appendChild(itemElement);
+//   });
+
+//   // Привязываем обработчики событий для кнопок "Удалить"
+//   attachDeleteEventListeners(); // Привязываем события удаления
+// }
+
+// // Функция удаления товара из корзины
+// function removeFromBasket(itemIndex) {
+//   console.log("Удаляем товар с индексом:", itemIndex);
+
+//   // Удаляем товар из массива по индексу
+//   basketItems.splice(itemIndex, 1); // Удаляем товар из массива
+//   renderBasketItems(); // Перерисовываем корзину
+//   updateBasketSum(); // Обновляем сумму после удаления товара
+//   updateBasketItemsToggle();
+//   if (basketItems.length === 0) {
+//     basketItemsToggle.classList.add("basket-items-disable");
+//   }
+// }
+// // Функция обновления общей суммы корзины
+// function updateBasketSum() {
+//   const totalSum = basketItems.reduce(
+//     (sum, item) => sum + parseFloat(item.price),
+//     0
+//   );
+//   // Суммируем цены всех товаров
+//   document.querySelector(".basket-sum-subtitle").textContent = `${totalSum} ₽`; // Обновляем текст суммы
+// }
+
+// products.forEach((product) => {
+//   const elements = document.querySelectorAll(product.className);
+//   elements.forEach((el) => {
+//     el.addEventListener("click", () => {
+//       addToBasket(product.name, product.images[0], product.price); // Добавление товара в корзину с правильным изображением
+//     });
+//   });
+// });
