@@ -677,14 +677,6 @@ dialogBasket.close();
 //   }
 // }
 
-// document.querySelectorAll(".dialog").forEach((dialog) => {
-//   dialog.addEventListener("click", (event) => {
-//     if (event.target === dialog) {
-//       toggleDialogProduct(dialog);
-//     }
-//   });
-// });
-
 // basketView.forEach((el) => {
 //   el.addEventListener("click", () => toggleDialogProduct(dialogBasket));
 // });
