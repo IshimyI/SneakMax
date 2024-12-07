@@ -856,6 +856,9 @@ header {
   color: #808080;
   font-weight: 300;
   font-size: 16px;
+}
+
+.quiz-btn-number {
   border-top: 1px solid #444b58;
 }
 
@@ -868,7 +871,7 @@ header {
   padding: 20px;
   border-radius: 5px;
   border: none;
-  width: 200px;
+  width: clamp(12.5rem, 0.67rem + 59.15vw, 29.063rem);
   height: 200px;
   font-size: 16px;
   position: static;
