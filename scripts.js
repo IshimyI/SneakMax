@@ -533,11 +533,14 @@ productBtn.forEach((el) => {
         <div class="dialog-product-left">
       <div class="big-imgs">
         ${product.images
-          .map(
-            (img, index) =>
-              `<img class="big-img big-img-${
-                index + 1
-              }" src="${img}" alt="Главное фото ${index + 1}" />`
+          .map((img, index) =>
+            index === 0
+              ? `<img class="big-img big-img-z big-img-${
+                  index + 1
+                }" src="${img}" alt="Главное фото ${index + 1}" />`
+              : `<img class="big-img big-img-${
+                  index + 1
+                }" src="${img}" alt="Главное фото ${index + 1}" />`
           )
           .join("")}
       </div>
@@ -629,12 +632,14 @@ productBtn.forEach((el) => {
     smallImgs.forEach((img, index) => {
       img.addEventListener("mouseover", () => {
         bigImgs[index].classList.add("big-img-z");
+        bigImgs[0].classList.remove("big-img-z");
       });
     });
 
     smallImgs.forEach((img, index) => {
       img.addEventListener("mouseout", () => {
         bigImgs[index].classList.remove("big-img-z");
+        bigImgs[0].classList.add("big-img-z");
       });
     });
   });
