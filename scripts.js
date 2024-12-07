@@ -31,6 +31,10 @@ const QuizPageForm = document.querySelector(".quiz-page-grid");
 const QuizPage2Form = document.querySelector(".quiz-page-grid-2page");
 const QuizPage3Form = document.querySelector(".quiz-page-label");
 
+let selectedPage1 = [];
+let selectedPage2 = [];
+let textInputValue = "";
+
 QuizPageForm.addEventListener("submit", (event) => {
   event.preventDefault();
 });
@@ -84,6 +88,10 @@ QuizNext1.addEventListener("click", (event) => {
   QuizQuestion1.classList.add("quiz-page-hidden");
   QuizQuestion2.classList.remove("quiz-page-hidden");
   QuizTitle.scrollIntoView({ behavior: "smooth" });
+
+  selectedPage1 = Array.from(inputPage1)
+    .filter((checkbox) => checkbox.checked)
+    .map((checkbox) => checkbox.nextElementSibling.textContent.trim()); // Текст рядом с чекбоксом
 });
 
 QuizNext2.addEventListener("click", (event) => {
@@ -95,6 +103,10 @@ QuizNext2.addEventListener("click", (event) => {
   QuizQuestion2.classList.add("quiz-page-hidden");
   QuizQuestion3.classList.remove("quiz-page-hidden");
   QuizTitle.scrollIntoView({ behavior: "smooth" });
+
+  selectedPage2 = Array.from(inputPage2)
+    .filter((checkbox) => checkbox.checked)
+    .map((checkbox) => checkbox.nextElementSibling.textContent.trim());
 });
 
 QuizNext3.addEventListener("click", (event) => {
@@ -107,6 +119,23 @@ QuizNext3.addEventListener("click", (event) => {
   QuizTitle.classList.add("quiz-page-hidden");
   QuizRes.classList.remove("quiz-page-hidden");
   QuizTitle.scrollIntoView({ behavior: "smooth" });
+
+  textInputValue = inputPage3.value.trim();
+});
+
+const pageForm = document.querySelector("#page-form");
+
+pageForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const formData = new FormData(pageForm);
+  const data = Object.fromEntries(formData.entries());
+  alert(`
+    Тип кроссовок: ${selectedPage1.join(", ")}
+    Тип кроссовок: ${selectedPage2.join(", ")}
+    Ваши пожелания: ${textInputValue}
+    Имя: ${data["page-name"]}
+    Почта: ${data["page-email"]}
+    `);
 });
 
 // #endregion
@@ -139,7 +168,7 @@ ctaForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const formData = new FormData(ctaForm);
   const data = Object.fromEntries(formData.entries());
-  alert(JSON.stringify(data));
+  alert(`Имя: ${data["cta-name"]}\nТелефон: ${data["cta-phone"]}`);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -684,79 +713,3 @@ addToBasket.forEach((el) => {
 dialogBasket.close();
 
 // #endregion
-
-// lkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmmlkefofmoemfoemfoemmm
-
-// const basketItemsToggle = document.getElementById("basket-items-toggle");
-// function updateBasketItemsToggle() {
-//   if (document.querySelector(".basket-sum-subtitle").textContent > 0) {
-//     basketItemsToggle.classList.add("basket-items-disable");
-//   } else {
-//     basketItemsToggle.classList.remove("basket-items-disable");
-//   }
-// }
-
-// basketView.forEach((el) => {
-//   el.addEventListener("click", () => toggleDialogProduct(dialogBasket));
-// });
-
-// // Функция отображения всех товаров в корзине
-// function renderBasketItems() {
-//   const basketItemsContainer = document.getElementById("basket-items");
-//   basketItemsContainer.innerHTML = ""; // Очистка контейнера перед рендером
-
-//   // Создаем HTML для каждого товара в корзине
-//   basketItems.forEach((item, index) => {
-//     const itemElement = document.createElement("div");
-//     itemElement.classList.add("basket-item");
-
-//     itemElement.innerHTML = `
-//       <img src="${item.image}" alt="${item.name}" class="basket-item-image">
-//       <div class="basket-item-info">
-//         <p class="basket-item-name">${item.name}</p>
-//         <p class="basket-item-price">${item.price} ₽</p>
-//       </div>
-//       <button class="basket-item-delete" data-id="${item.id}" data-index="${index}">
-//        <img src="Images/trash.svg" alt="Удалить" />
-//       </button>
-//     `;
-
-//     // Добавляем товар в корзину
-//     basketItemsContainer.appendChild(itemElement);
-//   });
-
-//   // Привязываем обработчики событий для кнопок "Удалить"
-//   attachDeleteEventListeners(); // Привязываем события удаления
-// }
-
-// // Функция удаления товара из корзины
-// function removeFromBasket(itemIndex) {
-//   console.log("Удаляем товар с индексом:", itemIndex);
-
-//   // Удаляем товар из массива по индексу
-//   basketItems.splice(itemIndex, 1); // Удаляем товар из массива
-//   renderBasketItems(); // Перерисовываем корзину
-//   updateBasketSum(); // Обновляем сумму после удаления товара
-//   updateBasketItemsToggle();
-//   if (basketItems.length === 0) {
-//     basketItemsToggle.classList.add("basket-items-disable");
-//   }
-// }
-// // Функция обновления общей суммы корзины
-// function updateBasketSum() {
-//   const totalSum = basketItems.reduce(
-//     (sum, item) => sum + parseFloat(item.price),
-//     0
-//   );
-//   // Суммируем цены всех товаров
-//   document.querySelector(".basket-sum-subtitle").textContent = `${totalSum} ₽`; // Обновляем текст суммы
-// }
-
-// products.forEach((product) => {
-//   const elements = document.querySelectorAll(product.className);
-//   elements.forEach((el) => {
-//     el.addEventListener("click", () => {
-//       addToBasket(product.name, product.images[0], product.price); // Добавление товара в корзину с правильным изображением
-//     });
-//   });
-// });
