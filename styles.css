@@ -216,6 +216,8 @@ header {
 .dialog-products-2sides {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  padding: 0 15px 15px 15px;
 }
 
 .dialog-product {
@@ -224,6 +226,7 @@ header {
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 200px;
+  width: 100%;
   color: #444b58;
 }
 
@@ -242,7 +245,7 @@ header {
   position: relative;
   overflow: hidden;
   width: clamp(14.688rem, -20.734rem + 73.8vw, 30rem);
-  height: 250px;
+  height: clamp(6.25rem, 1.078rem + 25.86vw, 15.625rem);
   padding-bottom: 100px;
   border-radius: 5px;
   overflow: hidden;
@@ -261,7 +264,6 @@ header {
 }
 
 .big-img-z {
-  position: relative;
   z-index: 2;
 }
 
@@ -332,7 +334,7 @@ header {
 }
 
 .size-btn {
-  width: 45px;
+  width: 70px;
   height: 32px;
   background-color: white;
   color: #444b58;
@@ -347,6 +349,9 @@ header {
 
 .size-btns {
   padding-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .plus-delivery {
@@ -1241,7 +1246,7 @@ button:disabled {
 
 /* #endregion */
 
-/* instagram-section */
+/* #region instagram-section */
 
 .instagram-section {
   display: none;
@@ -1295,6 +1300,8 @@ button:disabled {
   justify-content: center;
   align-items: center;
 }
+
+/* #endregion */
 
 /* #endregion */
 
@@ -1583,6 +1590,10 @@ footer {
 
   .quiz-grid-item-img-1 {
     display: none;
+  }
+
+  .dialog-product {
+    width: 980px;
   }
 }
 

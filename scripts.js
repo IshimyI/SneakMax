@@ -623,6 +623,20 @@ productBtn.forEach((el) => {
     </div>
   </div>
     `;
+    const smallImgs = document.querySelectorAll(".small-img");
+    const bigImgs = document.querySelectorAll(".big-img");
+
+    smallImgs.forEach((img, index) => {
+      img.addEventListener("mouseover", () => {
+        bigImgs[index].classList.add("big-img-z");
+      });
+    });
+
+    smallImgs.forEach((img, index) => {
+      img.addEventListener("mouseout", () => {
+        bigImgs[index].classList.remove("big-img-z");
+      });
+    });
   });
   dialogProduct.showModal();
 });
