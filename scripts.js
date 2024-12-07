@@ -504,7 +504,7 @@ products.forEach((product, index) => {
 
 // #endregion
 
-// #regionproducts-btn
+// #region products-btn
 
 const buttonOpenProducts = document.querySelector(".products-button");
 const productHidden2 = document.querySelector(".products-item-2");
@@ -659,17 +659,21 @@ productBtn.forEach((el) => {
     const bigImgs = document.querySelectorAll(".big-img");
 
     smallImgs.forEach((img, index) => {
-      img.addEventListener("mouseover", () => {
-        bigImgs[index].classList.add("big-img-z");
-        bigImgs[0].classList.remove("big-img-z");
-      });
+      if (index !== 0) {
+        img.addEventListener("mouseover", () => {
+          bigImgs[index].classList.add("big-img-z");
+          bigImgs[0].classList.remove("big-img-z");
+        });
+      }
     });
 
     smallImgs.forEach((img, index) => {
-      img.addEventListener("mouseout", () => {
-        bigImgs[index].classList.remove("big-img-z");
-        bigImgs[0].classList.add("big-img-z");
-      });
+      if (index !== 0) {
+        img.addEventListener("mouseout", () => {
+          bigImgs[index].classList.remove("big-img-z");
+          bigImgs[0].classList.add("big-img-z");
+        });
+      }
     });
   });
   dialogProduct.showModal();
