@@ -800,6 +800,10 @@ header {
   grid-template-columns: 1fr;
 }
 
+.quiz-page-grid-2page-img {
+  display: none;
+}
+
 .quiz-page-grid-item {
   max-width: 100%;
   object-fit: cover;
@@ -860,6 +864,8 @@ header {
 
 .quiz-btn-number {
   border-top: 1px solid #444b58;
+  display: flex;
+  flex-direction: column;
 }
 
 .quiz-page-label-label {
@@ -1589,6 +1595,7 @@ footer {
   .quiz-page-grid-2page {
     display: flex;
     flex-direction: row;
+    gap: 100px;
   }
 
   .quiz-grid-item-img-1 {
@@ -1597,6 +1604,31 @@ footer {
 
   .dialog-product {
     width: 980px;
+  }
+
+  .quiz-page-grid-2page-img {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+  }
+
+  .quiz-page-grid-2page-img-1 {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .quiz-btn-number {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .quiz-next-button {
+    padding-top: 20px;
+    justify-content: flex-end;
   }
 }
 
