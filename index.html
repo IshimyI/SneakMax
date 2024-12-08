@@ -95,6 +95,72 @@
       <section id="products-section" class="products-section">
         <div class="products-container container">
           <h2 class="products-title">Каталог</h2>
+          <div class="products-filters">
+            <p class="products-filters-title">Подбор по параметрам</p>
+            <div class="products-filters-price">
+              <div class="products-filters-price-wrapper">
+                <p>Цена, руб</p>
+                <div class="values">
+                  <span id="range1"> 1 </span>
+                  <span> &dash; </span>
+                  <span id="range2"> 100 </span>
+                </div>
+                <div class="container-filter">
+                  <div class="slider-track"></div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="30"
+                    id="slider-1"
+                    oninput="slideOne()"
+                  />
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="70"
+                    id="slider-2"
+                    oninput="slideTwo()"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="products-filters-gender">
+              <p>Пол</p>
+              <div class="products-filters-gender-wrapper">
+                <div class="products-filters-gender-male">
+                  <input type="checkbox" name="gender" value="male" id="male" />
+                  <span>Мужской</span>
+                </div>
+                <div class="products-filters-gender-female">
+                  <input
+                    type="checkbox"
+                    name="gender"
+                    value="female"
+                    id="female"
+                  />
+                  <span>Женский</span>
+                </div>
+              </div>
+            </div>
+            <div class="products-filters-size">
+              <p>Размер</p>
+              <div class="products-filters-size-grid">
+                <button>35</button>
+                <button>36</button>
+                <button>37</button>
+                <button>38</button>
+                <button>39</button>
+                <button>40</button>
+                <button>41</button>
+                <button>42</button>
+                <button>43</button>
+              </div>
+            </div>
+            <button>Применить</button>
+            <button>Сбросить</button>
+          </div>
           <div class="products-grid"></div>
           <button class="products-button">Показать еще</button>
         </div>
@@ -816,8 +882,6 @@
     <!-- #endregion -->
   </body>
 </html>
-
-<!-- todo Сделать значок сколько товаров в корзине -->
 
 <!-- todo Сделать оформление заказа -->
 

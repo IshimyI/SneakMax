@@ -705,8 +705,17 @@ const dialogBasket = document.getElementById("dialog-basket");
 const addToBasket = document.querySelectorAll(
   products.map((item) => `.${item.className.replace(".", "")}`).join(", ")
 );
-let sumOfBasket = document.querySelector(".basket-sum-subtitle");
+const numberOfItems = document.querySelector(".basket-items-toggle");
 const basket = [];
+
+function updateNumberOfItems() {
+  numberOfItems.textContent = basket.length;
+  if (basket.length === 0) {
+    numberOfItems.classList.add("basket-items-disable");
+  } else {
+    numberOfItems.classList.remove("basket-items-disable");
+  }
+}
 
 function toggleDialogBasket() {
   if (dialogBasket.open) {
@@ -745,6 +754,7 @@ function renderBasketItems() {
       });
 
     basketContainer.appendChild(basketItem);
+    updateNumberOfItems();
   });
 
   updateTotalSum();
@@ -762,7 +772,16 @@ function removeFromBasket(id) {
 // Функция для подсчета итоговой суммы
 function updateTotalSum() {
   const totalSum = basket.reduce((sum, item) => sum + item.price, 0);
-  document.querySelector(".basket-sum-subtitle").textContent = `${totalSum} ₽`;
+  if (totalSum === 0) {
+    numberOfItems.classList.add("basket-items-disable");
+    document.querySelector(
+      ".basket-sum-subtitle"
+    ).textContent = `${totalSum} ₽`;
+  } else {
+    document.querySelector(
+      ".basket-sum-subtitle"
+    ).textContent = `${totalSum} ₽`;
+  }
 }
 
 // Открытие диалога при нажатии на кнопку
@@ -801,5 +820,42 @@ addToBasketButtons.forEach((el) => {
 });
 
 dialogBasket.close();
+
+// #endregion
+
+// #region products-filters
+
+window.onload = function () {
+  slideOne();
+  slideTwo();
+};
+
+let sliderOne = document.getElementById("slider-1");
+let sliderTwo = document.getElementById("slider-2");
+let displayValOne = document.getElementById("range1");
+let displayValTwo = document.getElementById("range2");
+let minGap = 0;
+let sliderTrack = document.querySelector(".slider-track");
+let sliderMaxValue = document.getElementById("slider-1").max;
+
+function slideOne() {
+  if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+    sliderOne.value = parseInt(sliderTwo.value) - minGap;
+  }
+  displayValOne.textContent = sliderOne.value;
+  fillColor();
+}
+function slideTwo() {
+  if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+    sliderTwo.value = parseInt(sliderOne.value) + minGap;
+  }
+  displayValTwo.textContent = sliderTwo.value;
+  fillColor();
+}
+function fillColor() {
+  percent1 = (sliderOne.value / sliderMaxValue) * 100;
+  percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+  sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #444B58 ${percent1}% , #444B58 ${percent2}%, #dadae5 ${percent2}%)`;
+}
 
 // #endregion
