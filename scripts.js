@@ -490,9 +490,12 @@ products.forEach((product, index) => {
             alt="Посмотреть товары"
           />
         </button>
-        <button class="products-item-btn">
+        <button class="${product.className.replace(
+          ".",
+          ""
+        )} products-item-btn add-to-cart-btn" data-id="${product.id}">
           <img
-            class="svg svg-vector ${product.className.replace(".", "")}"
+            class="svg svg-vector"
             src="Images/Vector.svg"
             alt="Добавить в корзину"
           />
@@ -623,7 +626,7 @@ productBtn.forEach((el) => {
         <div class="price-sale">${product.price} ₽</div>
         <div class="price-no-sale">${product.discontPrice} ₽</div>
       </div>
-      <button class="add-to-cart">Заказать</button>
+      <button class="add-to-cart add-to-cart-dialog-btn add-to-cart-btn">Добавить в корзину</button>
       <div class="pluses-delivery">
         <div class="plus-delivery">
           ✔︎ <span>Бесплатная доставка до двери</span>
@@ -659,6 +662,14 @@ productBtn.forEach((el) => {
     </div>
   </div>
     `;
+    const addingToCartFromDaialog = document.querySelector(
+      ".add-to-cart-dialog-btn"
+    );
+    addingToCartFromDaialog.addEventListener("click", () => {
+      basket.push({ ...product, uniqueId: Date.now() }); // Добавляем товар в basket
+      console.log("Товар добавлен:", product);
+      renderBasketItems();
+    });
     const smallImgs = document.querySelectorAll(".small-img");
     const bigImgs = document.querySelectorAll(".big-img");
 
@@ -691,7 +702,10 @@ dialogProduct.close();
 
 const btnBasket = document.querySelectorAll(".basket-open");
 const dialogBasket = document.getElementById("dialog-basket");
-const addToBasket = document.querySelectorAll(".add-to-cart");
+const addToBasket = document.querySelectorAll(
+  products.map((item) => `.${item.className.replace(".", "")}`).join(", ")
+);
+let sumOfBasket = document.querySelector(".basket-sum-subtitle");
 const basket = [];
 
 function toggleDialogBasket() {
@@ -700,6 +714,55 @@ function toggleDialogBasket() {
   } else {
     dialogBasket.showModal();
   }
+}
+
+function renderBasketItems() {
+  const basketContainer = document.getElementById("basket-items");
+  basketContainer.innerHTML = ""; // Очищаем контейнер перед рендерингом
+
+  // Проходимся по массиву basket и добавляем элементы в разметку
+  basket.forEach((item) => {
+    const basketItem = document.createElement("div");
+    basketItem.className = "basket-item";
+    basketItem.innerHTML = `
+      <div class="basket-item-image">
+        <img src="${item.images[0]}" alt="${item.name}" />
+      </div>
+      <div class="basket-item-info">
+        <p class="basket-item-name">${item.name}</p>
+        <p class="basket-item-price">${item.price} ₽</p>
+      </div>
+      <button class="basket-item-remove" data-id="${item.id}">
+        <img src="Images/trash.svg" alt="Удалить" />
+      </button>
+    `;
+
+    // Добавляем обработчик для кнопки удаления
+    basketItem
+      .querySelector(".basket-item-remove")
+      .addEventListener("click", () => {
+        removeFromBasket(item.id);
+      });
+
+    basketContainer.appendChild(basketItem);
+  });
+
+  updateTotalSum();
+}
+
+// Функция удаления товара из корзины
+function removeFromBasket(id) {
+  const index = basket.findIndex((item) => item.id === id);
+  if (index !== -1) {
+    basket.splice(index, 1); // Удаляем товар из массива basket
+    renderBasketItems(); // Обновляем отображение корзины
+  }
+}
+
+// Функция для подсчета итоговой суммы
+function updateTotalSum() {
+  const totalSum = basket.reduce((sum, item) => sum + item.price, 0);
+  document.querySelector(".basket-sum-subtitle").textContent = `${totalSum} ₽`;
 }
 
 // Открытие диалога при нажатии на кнопку
@@ -714,8 +777,27 @@ dialogBasket.addEventListener("click", (event) => {
   }
 });
 
-addToBasket.forEach((el) => {
-  el.addEventListener("click", () => {});
+const addToBasketButtons = document.querySelectorAll(".add-to-cart-btn");
+
+addToBasketButtons.forEach((el) => {
+  el.addEventListener("click", () => {
+    const id = parseInt(el.dataset.id);
+
+    if (isNaN(id)) {
+      console.error("ID товара не является числом:", el.dataset.id);
+      return;
+    }
+
+    const product = products.find((item) => item.id === id);
+
+    if (product) {
+      basket.push({ ...product, uniqueId: Date.now() }); // Добавляем товар в basket
+      console.log("Товар добавлен:", product);
+      renderBasketItems(); // Обновляем отображение корзины
+    } else {
+      console.error(`Товар с ID ${id} не найден`);
+    }
+  });
 });
 
 dialogBasket.close();

@@ -395,6 +395,11 @@ header {
 
 /* #region dialog-basket */
 
+.basket-item-remove {
+  border: none;
+  background-color: #fff;
+}
+
 .dialog-basket::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -475,7 +480,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 20px;
   border-bottom: 1px solid #ddd;
 }
 
