@@ -31,6 +31,8 @@ const QuizPageForm = document.querySelector(".quiz-page-grid");
 const QuizPage2Form = document.querySelector(".quiz-page-grid-2page");
 const QuizPage3Form = document.querySelector(".quiz-page-label");
 
+const quizHiddenImg = document.querySelector(".hidden-img-1");
+
 let selectedPage1 = [];
 let selectedPage2 = [];
 let textInputValue = "";
@@ -127,6 +129,8 @@ const pageForm = document.querySelector("#page-form");
 
 pageForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  quizHiddenImg.classList.remove("hidden-img-1");
+  quizHiddenImg.classList.add("img-send");
   const formData = new FormData(pageForm);
   const data = Object.fromEntries(formData.entries());
   alert(`

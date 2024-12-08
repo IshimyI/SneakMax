@@ -435,31 +435,45 @@
           </p>
           <div class="page page-res">
             <div class="page-container container">
-              <h2 class="page-p-title">Получить предложение</h2>
-              <p class="page-subtitle">
-                Получите подборку подходящих для вас моделей на почту
-              </p>
-              <form id="page-form" class="page-form" action="#" method="post">
-                <input
-                  class="page-item"
-                  type="text"
-                  id="page-name"
-                  name="page-name"
-                  placeholder="Ваше имя"
-                  required
+              <div class="wrapper-form-send">
+                <h2 class="page-p-title">Получить предложение</h2>
+                <p class="page-subtitle">
+                  Получите подборку подходящих для вас моделей на почту
+                </p>
+                <form id="page-form" class="page-form" action="#" method="post">
+                  <input
+                    class="page-item"
+                    type="text"
+                    id="page-name"
+                    name="page-name"
+                    placeholder="Ваше имя"
+                    required
+                  />
+                  <input
+                    class="page-item"
+                    type="email"
+                    id="page-email"
+                    name="page-email"
+                    placeholder="E-mail"
+                    required
+                  />
+                  <button class="page-item page-button" type="submit">
+                    Получить
+                  </button>
+                </form>
+              </div>
+              <div class="wrapper-form-send hidden-img wrapper-iphone">
+                <img
+                  class="hidden-img"
+                  src="Images/iPhone 11.png"
+                  alt="Айфон"
                 />
-                <input
-                  class="page-item"
-                  type="email"
-                  id="page-email"
-                  name="page-email"
-                  placeholder="E-mail"
-                  required
+                <img
+                  class="hidden-img-1"
+                  src="Images/send.png"
+                  alt="Отправить"
                 />
-                <button class="page-item page-button" type="submit">
-                  Получить
-                </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>

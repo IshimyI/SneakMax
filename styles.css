@@ -944,6 +944,25 @@ button:disabled {
   opacity: 0.6;
 }
 
+.hidden-img {
+  display: none;
+}
+
+.wrapper-iphone {
+  position: relative;
+  object-fit: contain;
+}
+
+.img-send {
+  position: absolute;
+  width: 207px;
+  height: 415px;
+}
+
+.hidden-img-1 {
+  display: none;
+}
+
 /* #endregion */
 
 /* #region team-section */
@@ -1386,6 +1405,38 @@ footer {
 /* #region media - laptop */
 
 @media screen and (width > 768px) {
+  .page-form {
+    gap: 20px;
+  }
+
+  .page-p-title {
+    font-size: 36px;
+  }
+
+  .hidden-img {
+    display: block;
+  }
+
+  .page-form-send-img {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .wrapper-form-send {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 25px;
+  }
+
+  .page-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
   .products-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
