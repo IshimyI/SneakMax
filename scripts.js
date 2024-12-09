@@ -851,6 +851,8 @@ sliderTwo.min = Math.min(...prices);
 sliderTwo.max = Math.max(...prices);
 sliderTwo.value = Math.max(...prices);
 
+sliderMaxValue = Math.max(...prices);
+
 function slideOne() {
   if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
     sliderOne.value = parseInt(sliderTwo.value) - minGap;
@@ -866,9 +868,20 @@ function slideTwo() {
   fillColor();
 }
 function fillColor() {
-  percent1 = (sliderOne.value / sliderMaxValue) * 100;
-  percent2 = (sliderTwo.value / sliderMaxValue) * 100;
-  sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #444B58 ${percent1}% , #444B58 ${percent2}%, #444B58 ${percent2}%)`;
+  let percent1 =
+    ((sliderOne.value - sliderOne.min) / (sliderMaxValue - sliderOne.min)) *
+    100;
+  let percent2 =
+    ((sliderTwo.value - sliderTwo.min) / (sliderMaxValue - sliderTwo.min)) *
+    100;
+
+  sliderTrack.style.background = `linear-gradient(
+    to right, 
+    #dadae5 ${percent1}%, 
+    #444B58 ${percent1}%, 
+    #444B58 ${percent2}%, 
+    #dadae5 ${percent2}%
+  )`;
 }
 
 // #endregion
