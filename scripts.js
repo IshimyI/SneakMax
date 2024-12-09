@@ -698,6 +698,69 @@ dialogProduct.close();
 
 // #endregion
 
+// #region products-filters
+
+const prices = [];
+products.forEach((product) => {
+  prices.push(product.price);
+});
+
+window.onload = function () {
+  slideOne();
+  slideTwo();
+};
+
+let sliderOne = document.getElementById("slider-1");
+let sliderTwo = document.getElementById("slider-2");
+let displayValOne = document.getElementById("range1");
+let displayValTwo = document.getElementById("range2");
+let minGap = 0;
+let sliderTrack = document.querySelector(".slider-track");
+let sliderMaxValue = document.getElementById("slider-1").max;
+
+sliderOne.min = Math.min(...prices);
+sliderOne.max = Math.max(...prices);
+sliderOne.value = Math.min(...prices);
+
+sliderTwo.min = Math.min(...prices);
+sliderTwo.max = Math.max(...prices);
+sliderTwo.value = Math.max(...prices);
+
+sliderMaxValue = Math.max(...prices);
+
+function slideOne() {
+  if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+    sliderOne.value = parseInt(sliderTwo.value) - minGap;
+  }
+  displayValOne.textContent = sliderOne.value;
+  fillColor();
+}
+function slideTwo() {
+  if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+    sliderTwo.value = parseInt(sliderOne.value) + minGap;
+  }
+  displayValTwo.textContent = sliderTwo.value;
+  fillColor();
+}
+function fillColor() {
+  let percent1 =
+    ((sliderOne.value - sliderOne.min) / (sliderMaxValue - sliderOne.min)) *
+    100;
+  let percent2 =
+    ((sliderTwo.value - sliderTwo.min) / (sliderMaxValue - sliderTwo.min)) *
+    100;
+
+  sliderTrack.style.background = `linear-gradient(
+    to right, 
+    #dadae5 ${percent1}%, 
+    #444B58 ${percent1}%, 
+    #444B58 ${percent2}%, 
+    #dadae5 ${percent2}%
+  )`;
+}
+
+// #endregion
+
 // #region dialog-basket
 
 const btnBasket = document.querySelectorAll(".basket-open");
@@ -820,68 +883,5 @@ addToBasketButtons.forEach((el) => {
 });
 
 dialogBasket.close();
-
-// #endregion
-
-// #region products-filters
-
-const prices = [];
-products.forEach((product) => {
-  prices.push(product.price);
-});
-
-window.onload = function () {
-  slideOne();
-  slideTwo();
-};
-
-let sliderOne = document.getElementById("slider-1");
-let sliderTwo = document.getElementById("slider-2");
-let displayValOne = document.getElementById("range1");
-let displayValTwo = document.getElementById("range2");
-let minGap = 0;
-let sliderTrack = document.querySelector(".slider-track");
-let sliderMaxValue = document.getElementById("slider-1").max;
-
-sliderOne.min = Math.min(...prices);
-sliderOne.max = Math.max(...prices);
-sliderOne.value = Math.min(...prices);
-
-sliderTwo.min = Math.min(...prices);
-sliderTwo.max = Math.max(...prices);
-sliderTwo.value = Math.max(...prices);
-
-sliderMaxValue = Math.max(...prices);
-
-function slideOne() {
-  if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-    sliderOne.value = parseInt(sliderTwo.value) - minGap;
-  }
-  displayValOne.textContent = sliderOne.value;
-  fillColor();
-}
-function slideTwo() {
-  if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-    sliderTwo.value = parseInt(sliderOne.value) + minGap;
-  }
-  displayValTwo.textContent = sliderTwo.value;
-  fillColor();
-}
-function fillColor() {
-  let percent1 =
-    ((sliderOne.value - sliderOne.min) / (sliderMaxValue - sliderOne.min)) *
-    100;
-  let percent2 =
-    ((sliderTwo.value - sliderTwo.min) / (sliderMaxValue - sliderTwo.min)) *
-    100;
-
-  sliderTrack.style.background = `linear-gradient(
-    to right, 
-    #dadae5 ${percent1}%, 
-    #444B58 ${percent1}%, 
-    #444B58 ${percent2}%, 
-    #dadae5 ${percent2}%
-  )`;
-}
 
 // #endregion
