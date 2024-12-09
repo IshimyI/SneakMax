@@ -101,25 +101,28 @@
               <div class="products-filters-price-wrapper">
                 <p>Цена, руб</p>
                 <div class="values">
-                  <span id="range1"> 1 </span>
-                  <span> &dash; </span>
-                  <span id="range2"> 100 </span>
+                  <div class="value1">
+                    <span id="range1"> </span>
+                  </div>
+                  <div class="value2">
+                    <span id="range2"></span>
+                  </div>
                 </div>
                 <div class="container-filter">
                   <div class="slider-track"></div>
                   <input
                     type="range"
                     min="0"
-                    max="100"
-                    value="30"
+                    max="999999"
+                    value="0"
                     id="slider-1"
                     oninput="slideOne()"
                   />
                   <input
                     type="range"
                     min="0"
-                    max="100"
-                    value="70"
+                    max="999999"
+                    value="0"
                     id="slider-2"
                     oninput="slideTwo()"
                   />
@@ -158,8 +161,8 @@
                 <button>43</button>
               </div>
             </div>
-            <button>Применить</button>
-            <button>Сбросить</button>
+            <button class="products-filters-button-apply">Применить</button>
+            <button class="products-filters-button-reset">Сбросить</button>
           </div>
           <div class="products-grid"></div>
           <button class="products-button">Показать еще</button>

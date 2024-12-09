@@ -1706,17 +1706,62 @@ footer {
 
 /* #region products-filters */
 
+.products-filters-title {
+  font-size: 24px;
+  font-weight: 400;
+  width: 240px;
+}
+
+.products-filters-gender-male,
+.products-filters-gender-female {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+
+  input {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border-color: #fff4ee;
+    background-color: #fff4ee;
+    color: #fff4ee;
+  }
+}
+
 .products-filters-gender-wrapper {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .products-filters {
   display: flex;
   flex-direction: column;
   max-width: 280px;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   background-color: #fff4ee;
+  color: #444b58;
+  border-radius: 4px;
+  gap: 20px;
+}
+
+.products-filters-size {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.value1 {
+  width: 50%;
+  height: 100%;
+  border-right: #b2b5bb 0.5px solid;
+}
+
+.value2 {
+  width: 50%;
+  height: 100%;
+  border-left: #b2b5bb 0.5px solid;
 }
 
 input[type="range"] {
@@ -1734,11 +1779,8 @@ input[type="range"] {
 }
 .slider-track {
   width: 100%;
-  height: 5px;
-  position: absolute;
+  height: 2px;
   margin: auto;
-  top: 0;
-  bottom: 0;
   border-radius: 5px;
 }
 input[type="range"]::-webkit-slider-runnable-track {
@@ -1755,59 +1797,50 @@ input[type="range"]::-ms-track {
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 1.7em;
-  width: 1.7em;
-  background-color: #444b58;
+  height: 1.35em; /* Высота полоски */
+  width: 0.2em; /* Ширина полоски */
+  background-color: #444b58; /* Цвет полоски */
   cursor: pointer;
-  margin-top: -9px;
   pointer-events: auto;
-  border-radius: 50%;
+  border-radius: 4px; /* Скругление углов (делает прямоугольник) */
+  margin-top: -7px; /* Смещение по вертикали для центрирования */
 }
+
 input[type="range"]::-moz-range-thumb {
-  -webkit-appearance: none;
-  height: 1.7em;
-  width: 1.7em;
-  cursor: pointer;
-  border-radius: 50%;
+  height: 2em;
+  width: 0.5em;
   background-color: #444b58;
+  cursor: pointer;
   pointer-events: auto;
+  border-radius: 4px;
 }
 input[type="range"]::-ms-thumb {
-  appearance: none;
-  height: 1.7em;
-  width: 1.7em;
-  cursor: pointer;
-  border-radius: 50%;
+  height: 2em;
+  width: 0.5em;
   background-color: #444b58;
+  cursor: pointer;
   pointer-events: auto;
+  border-radius: 4px;
 }
 input[type="range"]:active::-webkit-slider-thumb {
   background-color: #ffffff;
   border: 3px solid #444b58;
 }
 .values {
-  background-color: #444b58;
+  background-color: #fff4ee;
   position: relative;
   margin: auto;
   padding: 10px 0;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   text-align: center;
   font-weight: 500;
   font-size: 25px;
-  color: #ffffff;
-}
-.values:before {
-  content: "";
-  position: absolute;
-  height: 0;
-  width: 0;
-  border-top: 15px solid #444b58;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  margin: auto;
-  bottom: -14px;
-  left: 0;
-  right: 0;
+  color: #444b58;
+  display: flex;
+  justify-content: space-around;
+  border: #b2b5bb 1px solid;
+  border-bottom: none;
 }
 
 .products-filters-price-wrapper {
@@ -1819,8 +1852,39 @@ input[type="range"]:active::-webkit-slider-thumb {
 .container-filter {
   position: relative;
   width: 100%;
-  height: 100px;
-  margin-top: 30px;
+}
+
+.products-filters-size-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 0.5px solid #dbbba9;
+
+  button {
+    width: 80px;
+    height: 57px;
+    border: 0.5px solid #dbbba9;
+    background-color: #fff4ee;
+    font-size: 16px;
+  }
+}
+
+.products-filters-button-apply {
+  border: none;
+  background-color: #444b58;
+  color: #fff;
+  width: 239px;
+  height: 60px;
+  border-radius: 4px;
+}
+
+.products-filters-button-reset {
+  border: none;
+  background-color: #fff4ee;
+  color: #444b58;
+  width: 239px;
+  height: 40px;
+  font-weight: 400;
 }
 
 /* #endregion */
