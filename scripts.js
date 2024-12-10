@@ -211,6 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // #endregion
 
 // #region products
+const basket = [];
 
 const products = [
   {
@@ -436,12 +437,12 @@ const products = [
     price: 19999,
     discontPrice: 21999,
     images: [
-      "Images/foot.jpg",
       "Images/foot 2-new.jpeg",
       "Images/foot.jpg",
       "Images/foot 2-new.jpeg",
       "Images/foot.jpg",
       "Images/foot 2-new.jpeg",
+      "Images/foot.jpg",
     ],
     sex: "Женские",
     size: ["39", "40", "41", "42", "43", "44"],
@@ -457,25 +458,175 @@ const products = [
 
 // #endregion
 
+// #region products-filters
+
+const prices = [];
+products.forEach((product) => {
+  prices.push(product.price);
+});
+
+let sizes = [];
+products.forEach((product) => {
+  product.size.forEach((size) => {
+    sizes.push(size);
+  });
+});
+sizes = [...new Set(sizes)];
+
+const initialFilters = {
+  minPrice: Math.min(...prices),
+  maxPrice: Math.max(...prices),
+  genderMale: true,
+  genderFemale: true,
+  size: [...sizes],
+};
+
+const currentFilters = { ...initialFilters };
+
+window.onload = function () {
+  slideOne();
+  slideTwo();
+};
+
+let sliderOne = document.getElementById("slider-1");
+let sliderTwo = document.getElementById("slider-2");
+let displayValOne = document.getElementById("range1");
+let displayValTwo = document.getElementById("range2");
+let minGap = 0;
+let sliderTrack = document.querySelector(".slider-track");
+let sliderMaxValue = document.getElementById("slider-1").max;
+
+sliderOne.min = Math.min(...prices);
+sliderOne.max = Math.max(...prices);
+sliderOne.value = currentFilters.minPrice;
+
+sliderTwo.min = Math.min(...prices);
+sliderTwo.max = Math.max(...prices);
+sliderTwo.value = currentFilters.maxPrice;
+
+sliderMaxValue = Math.max(...prices);
+
+function slideOne() {
+  if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+    sliderOne.value = parseInt(sliderTwo.value) - minGap;
+  }
+  displayValOne.textContent = sliderOne.value;
+  fillColor();
+}
+function slideTwo() {
+  if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+    sliderTwo.value = parseInt(sliderOne.value) + minGap;
+  }
+  displayValTwo.textContent = sliderTwo.value;
+  fillColor();
+}
+
+function fillColor() {
+  let percent1 =
+    ((sliderOne.value - sliderOne.min) / (sliderMaxValue - sliderOne.min)) *
+    100;
+  let percent2 =
+    ((sliderTwo.value - sliderTwo.min) / (sliderMaxValue - sliderTwo.min)) *
+    100;
+
+  sliderTrack.style.background = `linear-gradient(
+    to right, 
+    #dadae5 ${percent1}%, 
+    #444B58 ${percent1}%, 
+    #444B58 ${percent2}%, 
+    #dadae5 ${percent2}%
+  )`;
+}
+
+const filterGender = document.querySelectorAll(
+  ".products-filters-gender-wrapper input"
+);
+const filterSize = document.querySelectorAll(
+  ".products-filters-size-grid button"
+);
+
+filterSize.forEach((size) => {
+  size.addEventListener("click", () => {
+    size.classList.toggle("active");
+  });
+});
+
+const filtersApply = document.querySelector(".products-filters-button-apply");
+filtersApply.addEventListener("click", () => {
+  currentFilters.minPrice = sliderOne.value;
+  currentFilters.maxPrice = sliderTwo.value;
+  currentFilters.genderMale = filterGender[0].checked;
+  currentFilters.genderFemale = filterGender[1].checked;
+
+  const selectedSizes = [];
+
+  filterSize.forEach((size) => {
+    if (size.classList.contains("active")) {
+      selectedSizes.push(size.dataset.size);
+    }
+  });
+  console.log(currentFilters);
+
+  currentFilters.size = selectedSizes.filter((item) => item);
+  filterProducts();
+  productsBtn();
+});
+
+const filtersReset = document.querySelector(".products-filters-button-reset");
+filtersReset.addEventListener("click", () => {
+  currentFilters.minPrice = initialFilters.minPrice;
+  currentFilters.maxPrice = initialFilters.maxPrice;
+  currentFilters.genderMale = initialFilters.genderMale;
+  currentFilters.genderFemale = initialFilters.genderFemale;
+  currentFilters.size = initialFilters.size;
+
+  sliderOne.value = initialFilters.minPrice;
+  sliderTwo.value = initialFilters.maxPrice;
+  filterGender[0].checked = initialFilters.genderMale;
+  filterGender[1].checked = initialFilters.genderFemale;
+  fillColor();
+  slideOne();
+  slideTwo();
+  filterSize.forEach((size) => {
+    size.classList.remove("active");
+    filterProducts();
+  });
+  productsBtn();
+});
+
+// #endregion
+
 // #region products-section
 
 const productsGrid = document.querySelector(".products-grid");
 
-products.forEach((product, index) => {
-  const productElement = document.createElement("div");
-  productElement.classList.add("products-item");
+function filterProducts() {
+  productsGrid.innerHTML = "";
 
-  if (index === 1) {
-    productElement.classList.add("products-item-2");
-  }
-  if (index === 2) {
-    productElement.classList.add("products-item-3");
-  }
-  if (index > 2) {
-    productElement.classList.add("products-item-4");
-  }
+  const filteredProducts = products.filter((product) => {
+    return (
+      product.price >= currentFilters.minPrice &&
+      product.price <= currentFilters.maxPrice
+    );
+  });
 
-  productElement.innerHTML = `
+  console.log(filteredProducts);
+
+  filteredProducts.forEach((product, index) => {
+    const productElement = document.createElement("div");
+    productElement.classList.add("products-item");
+
+    if (index === 1) {
+      productElement.classList.add("products-item-2");
+    }
+    if (index === 2) {
+      productElement.classList.add("products-item-3");
+    }
+    if (index > 2) {
+      productElement.classList.add("products-item-4");
+    }
+
+    productElement.innerHTML = `
     <div class="products-item-img-btns">
       <img
         class="products-item-img"
@@ -504,30 +655,39 @@ products.forEach((product, index) => {
     </div>
     <p class="products-item-info">${product.name}</p>
     <p class="products-item-price">${product.price} р</p>
+    
   `;
-
-  productsGrid.appendChild(productElement);
-});
+    productsGrid.appendChild(productElement);
+  });
+  productsBtn();
+}
+filterProducts();
 
 // #endregion
 
 // #region products-btn
 
-const buttonOpenProducts = document.querySelector(".products-button");
-const productHidden2 = document.querySelector(".products-item-2");
-const productHidden3 = document.querySelector(".products-item-3");
-const productHidden4 = document.querySelectorAll(".products-item-4");
+function productsBtn() {
+  const buttonOpenProducts = document.querySelector(".products-button");
 
-buttonOpenProducts.addEventListener("click", () => {
-  productHidden2.classList.remove("products-item-2");
-  productHidden3.classList.remove("products-item-3");
-  productHidden4.forEach((product) => {
-    product.classList.remove("products-item-4");
+  if (buttonOpenProducts.classList.contains("products-button-open")) {
+    buttonOpenProducts.classList.remove("products-button-open");
+  }
+
+  const productHidden2 = document.querySelector(".products-item-2");
+  const productHidden3 = document.querySelector(".products-item-3");
+  const productHidden4 = document.querySelectorAll(".products-item-4");
+
+  buttonOpenProducts.addEventListener("click", () => {
+    productHidden2.classList.remove("products-item-2");
+    productHidden3.classList.remove("products-item-3");
+    productHidden4.forEach((product) => {
+      product.classList.remove("products-item-4");
+    });
+
+    buttonOpenProducts.classList.add("products-button-open");
   });
-
-  buttonOpenProducts.classList.add("products-button-open");
-});
-
+}
 // #endregion
 
 // #region dialog-product
@@ -698,78 +858,15 @@ dialogProduct.close();
 
 // #endregion
 
-// #region products-filters
-
-const prices = [];
-products.forEach((product) => {
-  prices.push(product.price);
-});
-
-window.onload = function () {
-  slideOne();
-  slideTwo();
-};
-
-let sliderOne = document.getElementById("slider-1");
-let sliderTwo = document.getElementById("slider-2");
-let displayValOne = document.getElementById("range1");
-let displayValTwo = document.getElementById("range2");
-let minGap = 0;
-let sliderTrack = document.querySelector(".slider-track");
-let sliderMaxValue = document.getElementById("slider-1").max;
-
-sliderOne.min = Math.min(...prices);
-sliderOne.max = Math.max(...prices);
-sliderOne.value = Math.min(...prices);
-
-sliderTwo.min = Math.min(...prices);
-sliderTwo.max = Math.max(...prices);
-sliderTwo.value = Math.max(...prices);
-
-sliderMaxValue = Math.max(...prices);
-
-function slideOne() {
-  if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-    sliderOne.value = parseInt(sliderTwo.value) - minGap;
-  }
-  displayValOne.textContent = sliderOne.value;
-  fillColor();
-}
-function slideTwo() {
-  if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-    sliderTwo.value = parseInt(sliderOne.value) + minGap;
-  }
-  displayValTwo.textContent = sliderTwo.value;
-  fillColor();
-}
-function fillColor() {
-  let percent1 =
-    ((sliderOne.value - sliderOne.min) / (sliderMaxValue - sliderOne.min)) *
-    100;
-  let percent2 =
-    ((sliderTwo.value - sliderTwo.min) / (sliderMaxValue - sliderTwo.min)) *
-    100;
-
-  sliderTrack.style.background = `linear-gradient(
-    to right, 
-    #dadae5 ${percent1}%, 
-    #444B58 ${percent1}%, 
-    #444B58 ${percent2}%, 
-    #dadae5 ${percent2}%
-  )`;
-}
-
-// #endregion
-
 // #region dialog-basket
 
-const btnBasket = document.querySelectorAll(".basket-open");
 const dialogBasket = document.getElementById("dialog-basket");
+const btnBasket = document.querySelectorAll(".basket-open");
+
 const addToBasket = document.querySelectorAll(
   products.map((item) => `.${item.className.replace(".", "")}`).join(", ")
 );
 const numberOfItems = document.querySelector(".basket-items-toggle");
-const basket = [];
 
 function updateNumberOfItems() {
   numberOfItems.textContent = basket.length;
@@ -797,17 +894,17 @@ function renderBasketItems() {
     const basketItem = document.createElement("div");
     basketItem.className = "basket-item";
     basketItem.innerHTML = `
-      <div class="basket-item-image">
-        <img src="${item.images[0]}" alt="${item.name}" />
-      </div>
-      <div class="basket-item-info">
-        <p class="basket-item-name">${item.name}</p>
-        <p class="basket-item-price">${item.price} ₽</p>
-      </div>
-      <button class="basket-item-remove" data-id="${item.id}">
-        <img src="Images/trash.svg" alt="Удалить" />
-      </button>
-    `;
+        <div class="basket-item-image">
+          <img src="${item.images[0]}" alt="${item.name}" />
+        </div>
+        <div class="basket-item-info">
+          <p class="basket-item-name">${item.name}</p>
+          <p class="basket-item-price">${item.price} ₽</p>
+        </div>
+        <button class="basket-item-remove" data-id="${item.id}">
+          <img src="Images/trash.svg" alt="Удалить" />
+        </button>
+      `;
 
     // Добавляем обработчик для кнопки удаления
     basketItem
@@ -881,7 +978,18 @@ addToBasketButtons.forEach((el) => {
     }
   });
 });
-
 dialogBasket.close();
+
+// #endregion
+
+// #region dialog-order
+
+const basketButton = document.querySelector(".basket-button");
+const dialogOrder = document.getElementById("dialog-order");
+
+basketButton.addEventListener("click", () => {
+  dialogBasket.close();
+  dialogOrder.showModal();
+});
 
 // #endregion

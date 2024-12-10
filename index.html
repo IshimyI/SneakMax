@@ -133,7 +133,13 @@
               <p>Пол</p>
               <div class="products-filters-gender-wrapper">
                 <div class="products-filters-gender-male">
-                  <input type="checkbox" name="gender" value="male" id="male" />
+                  <input
+                    type="checkbox"
+                    name="gender"
+                    value="male"
+                    id="male"
+                    checked
+                  />
                   <span>Мужской</span>
                 </div>
                 <div class="products-filters-gender-female">
@@ -142,6 +148,7 @@
                     name="gender"
                     value="female"
                     id="female"
+                    checked
                   />
                   <span>Женский</span>
                 </div>
@@ -150,15 +157,15 @@
             <div class="products-filters-size">
               <p>Размер</p>
               <div class="products-filters-size-grid">
-                <button>35</button>
-                <button>36</button>
-                <button>37</button>
-                <button>38</button>
-                <button>39</button>
-                <button>40</button>
-                <button>41</button>
-                <button>42</button>
-                <button>43</button>
+                <button data-size="35">35</button>
+                <button data-size="36">36</button>
+                <button data-size="37">37</button>
+                <button data-size="38">38</button>
+                <button data-size="39">39</button>
+                <button data-size="40">40</button>
+                <button data-size="41">41</button>
+                <button data-size="42">42</button>
+                <button data-size="43">43</button>
               </div>
             </div>
             <button class="products-filters-button-apply">Применить</button>
@@ -193,6 +200,51 @@
               <p class="basket-sum-subtitle">0 ₽</p>
             </div>
             <div class="basket-button">Оформить заказ</div>
+          </div>
+        </div>
+      </dialog>
+
+      <!-- #endregion -->
+
+      <!-- #region dialog-order -->
+
+      <dialog id="dialog-order" class="dialog-order">
+        <div class="dialog-order-container container">
+          <div class="dialog-order-header">
+            <h4 class="dialog-order-title">Оформление заказа</h4>
+            <div class="dialog-order-number">
+              <span class="dialog-order-random">Заказ</span>
+              <span class="dialog-order-random random-number"></span>
+            </div>
+          </div>
+          <div class="dialog-order-composition">
+            <div class="dialog-order-composition-count dialog-order-style">
+              <span class="dialog-order-composition-count-name">
+                Товаров в заказе:
+              </span>
+              <span class="dialog-order-composition-count-number"> </span>
+            </div>
+            <div class="dialog-order-composition-price dialog-order-style">
+              <span class="dialog-order-composition-price-name">
+                Общая сумма заказа:
+              </span>
+              <span class="dialog-order-composition-price-number"> </span>
+            </div>
+            <div class="dialog-order-composition-items-btn">
+              <div class="dialog-order-composition-items-wrapper">
+                <span class="dialog-order-composition-items-title"
+                  >Состав заказа:</span
+                >
+                <button class="dialog-order-composition-btn">›</button>
+              </div>
+              <div class="dialog-order-composition-items"></div>
+            </div>
+          </div>
+          <div class="dialog-order-form">
+            <input type="text" placeholder="Ваше имя" />
+            <input type="text" placeholder="Номер телефона" />
+            <input type="text" placeholder="E-mail" />
+            <button>Оформить заказ</button>
           </div>
         </div>
       </dialog>
