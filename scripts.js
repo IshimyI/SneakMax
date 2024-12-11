@@ -218,8 +218,8 @@ const products = [
     id: 1,
     className: ".add-to-cart-1",
     name: "Женские кроссовки Puma Force 1 Shadow",
-    price: 10901,
-    discontPrice: 12901,
+    price: 9999,
+    discontPrice: 11999,
     images: [
       "Images/foot.jpg",
       "Images/foot 2-new.jpeg",
@@ -604,9 +604,22 @@ function filterProducts() {
   productsGrid.innerHTML = "";
 
   const filteredProducts = products.filter((product) => {
+    const isMale =
+      currentFilters.genderMale && product.sex.trim() === "Мужские";
+    const isFemale =
+      currentFilters.genderFemale && product.sex.trim() === "Женские";
+    const isUnisex = product.sex.trim() === "Унисекс";
+
+    const hasSize =
+      currentFilters.size.length > 0
+        ? currentFilters.size.some((size) => product.size.includes(size))
+        : true;
+
     return (
       product.price >= currentFilters.minPrice &&
-      product.price <= currentFilters.maxPrice
+      product.price <= currentFilters.maxPrice &&
+      (isMale || isFemale || isUnisex) &&
+      hasSize
     );
   });
 
@@ -660,6 +673,7 @@ function filterProducts() {
     productsGrid.appendChild(productElement);
   });
   productsBtn();
+  attachProductHandlers();
 }
 filterProducts();
 
@@ -692,7 +706,6 @@ function productsBtn() {
 
 // #region dialog-product
 
-const productBtn = document.querySelectorAll(".product-open");
 const dialogProduct = document.getElementById("dialog-product");
 
 function toggleDialogProduct() {
@@ -703,11 +716,6 @@ function toggleDialogProduct() {
   }
 }
 
-// Открытие диалога при нажатии на кнопку
-productBtn.forEach((el) => {
-  el.addEventListener("click", toggleDialogProduct);
-});
-
 // Закрытие диалога при клике вне его области
 dialogProduct.addEventListener("click", (event) => {
   if (event.target === dialogProduct) {
@@ -715,17 +723,38 @@ dialogProduct.addEventListener("click", (event) => {
   }
 });
 
-productBtn.forEach((el) => {
-  el.addEventListener("click", () => {
-    const id = parseInt(el.dataset.id, 10); // Получаем ID из data-атрибута кнопки
-    const product = products.find((item) => item.id === id); // Находим товар по ID
+function attachProductHandlers() {
+  const productBtns = document.querySelectorAll(".product-open");
+  const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
 
-    if (!product) {
-      console.error(`Продукт с ID ${id} не найден`);
-      return;
-    }
-    dialogProduct.innerHTML = `
-        <div class="dialog-products-2sides">
+  productBtns.forEach((el) => {
+    el.addEventListener("click", toggleDialogProduct);
+    el.addEventListener("click", () => {
+      const id = parseInt(el.dataset.id, 10);
+      const product = products.find((item) => item.id === id);
+      if (!product) return;
+      console.log("Открыть диалог с продуктом:", product);
+      // Здесь же можно обновлять innerHTML диалога, а не снаружи
+      updateDialogProductContent(product);
+    });
+  });
+
+  addToCartButtons.forEach((el) => {
+    el.addEventListener("click", () => {
+      const id = parseInt(el.dataset.id, 10);
+      const product = products.find((item) => item.id === id);
+      if (product) {
+        basket.push({ ...product, uniqueId: Date.now() });
+        console.log("Добавлен в корзину:", product);
+        renderBasketItems();
+      }
+    });
+  });
+}
+
+function updateDialogProductContent(product) {
+  dialogProduct.innerHTML = `
+     <div class="dialog-products-2sides">
         <div class="dialog-product-left">
       <div class="big-imgs">
         ${product.images
@@ -821,38 +850,37 @@ productBtn.forEach((el) => {
       </div>
     </div>
   </div>
-    `;
-    const addingToCartFromDaialog = document.querySelector(
-      ".add-to-cart-dialog-btn"
-    );
-    addingToCartFromDaialog.addEventListener("click", () => {
-      basket.push({ ...product, uniqueId: Date.now() }); // Добавляем товар в basket
-      console.log("Товар добавлен:", product);
-      renderBasketItems();
-    });
-    const smallImgs = document.querySelectorAll(".small-img");
-    const bigImgs = document.querySelectorAll(".big-img");
+  `;
+  const addingToCartFromDaialog = document.querySelector(
+    ".add-to-cart-dialog-btn"
+  );
+  addingToCartFromDaialog.addEventListener("click", () => {
+    basket.push({ ...product, uniqueId: Date.now() }); // Добавляем товар в basket
+    console.log("Товар добавлен:", product);
+    renderBasketItems();
+  });
+  const smallImgs = document.querySelectorAll(".small-img");
+  const bigImgs = document.querySelectorAll(".big-img");
 
-    smallImgs.forEach((img, index) => {
-      if (index !== 0) {
-        img.addEventListener("mouseover", () => {
-          bigImgs[index].classList.add("big-img-z");
-          bigImgs[0].classList.remove("big-img-z");
-        });
-      }
-    });
+  smallImgs.forEach((img, index) => {
+    if (index !== 0) {
+      img.addEventListener("mouseover", () => {
+        bigImgs[index].classList.add("big-img-z");
+        bigImgs[0].classList.remove("big-img-z");
+      });
+    }
+  });
 
-    smallImgs.forEach((img, index) => {
-      if (index !== 0) {
-        img.addEventListener("mouseout", () => {
-          bigImgs[index].classList.remove("big-img-z");
-          bigImgs[0].classList.add("big-img-z");
-        });
-      }
-    });
+  smallImgs.forEach((img, index) => {
+    if (index !== 0) {
+      img.addEventListener("mouseout", () => {
+        bigImgs[index].classList.remove("big-img-z");
+        bigImgs[0].classList.add("big-img-z");
+      });
+    }
   });
   dialogProduct.showModal();
-});
+}
 
 dialogProduct.close();
 
@@ -956,28 +984,6 @@ dialogBasket.addEventListener("click", (event) => {
   }
 });
 
-const addToBasketButtons = document.querySelectorAll(".add-to-cart-btn");
-
-addToBasketButtons.forEach((el) => {
-  el.addEventListener("click", () => {
-    const id = parseInt(el.dataset.id);
-
-    if (isNaN(id)) {
-      console.error("ID товара не является числом:", el.dataset.id);
-      return;
-    }
-
-    const product = products.find((item) => item.id === id);
-
-    if (product) {
-      basket.push({ ...product, uniqueId: Date.now() }); // Добавляем товар в basket
-      console.log("Товар добавлен:", product);
-      renderBasketItems(); // Обновляем отображение корзины
-    } else {
-      console.error(`Товар с ID ${id} не найден`);
-    }
-  });
-});
 dialogBasket.close();
 
 // #endregion
@@ -993,3 +999,11 @@ basketButton.addEventListener("click", () => {
 });
 
 // #endregion
+
+// TODO При смене медии переносить фильтры влево
+
+// TODO Доделать диалог ордер
+
+// TODO Скрывать кнопку оформить заказ если нет товаров в корзине
+
+// TODO Скрывать кнопку показать еще если товаров после фильтра слишком мало

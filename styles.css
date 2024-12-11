@@ -708,6 +708,10 @@ header {
 
 /* #region products-filters */
 
+.value-title {
+  padding-bottom: 10px;
+}
+
 .products-filters-title {
   font-size: 24px;
   font-weight: 400;
