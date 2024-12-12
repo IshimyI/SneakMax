@@ -95,84 +95,89 @@
       <section id="products-section" class="products-section">
         <div class="products-container container">
           <h2 class="products-title">Каталог</h2>
-          <div class="products-filters">
-            <p class="products-filters-title">Подбор по параметрам</p>
-            <div class="products-filters-price">
-              <div class="products-filters-price-wrapper">
-                <p class="value-title">Цена, руб</p>
-                <div class="values">
-                  <div class="value1">
-                    <span id="range1"> </span>
+          <div class="products-grid-wrapper">
+            <div class="products-filters">
+              <p class="products-filters-title">Подбор по параметрам</p>
+              <div class="products-filters-price">
+                <div class="products-filters-price-wrapper">
+                  <p class="value-title">Цена, руб</p>
+                  <div class="values">
+                    <div class="value1">
+                      <span id="range1"> </span>
+                    </div>
+                    <div class="value2">
+                      <span id="range2"></span>
+                    </div>
                   </div>
-                  <div class="value2">
-                    <span id="range2"></span>
+                  <div class="container-filter">
+                    <div class="slider-track"></div>
+                    <input
+                      type="range"
+                      min="0"
+                      max="999999"
+                      value="0"
+                      id="slider-1"
+                      oninput="slideOne()"
+                    />
+                    <input
+                      type="range"
+                      min="0"
+                      max="999999"
+                      value="0"
+                      id="slider-2"
+                      oninput="slideTwo()"
+                    />
                   </div>
                 </div>
-                <div class="container-filter">
-                  <div class="slider-track"></div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="999999"
-                    value="0"
-                    id="slider-1"
-                    oninput="slideOne()"
-                  />
-                  <input
-                    type="range"
-                    min="0"
-                    max="999999"
-                    value="0"
-                    id="slider-2"
-                    oninput="slideTwo()"
-                  />
+              </div>
+              <div class="products-filters-gender">
+                <p>Пол</p>
+                <div class="products-filters-gender-wrapper">
+                  <div class="products-filters-gender-male">
+                    <input
+                      type="checkbox"
+                      name="gender"
+                      value="male"
+                      id="male"
+                      checked
+                    />
+                    <span>Мужской</span>
+                  </div>
+                  <div class="products-filters-gender-female">
+                    <input
+                      type="checkbox"
+                      name="gender"
+                      value="female"
+                      id="female"
+                      checked
+                    />
+                    <span>Женский</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="products-filters-gender">
-              <p>Пол</p>
-              <div class="products-filters-gender-wrapper">
-                <div class="products-filters-gender-male">
-                  <input
-                    type="checkbox"
-                    name="gender"
-                    value="male"
-                    id="male"
-                    checked
-                  />
-                  <span>Мужской</span>
-                </div>
-                <div class="products-filters-gender-female">
-                  <input
-                    type="checkbox"
-                    name="gender"
-                    value="female"
-                    id="female"
-                    checked
-                  />
-                  <span>Женский</span>
+              <div class="products-filters-size">
+                <p>Размер</p>
+                <div class="products-filters-size-grid">
+                  <button data-size="35">35</button>
+                  <button data-size="36">36</button>
+                  <button data-size="37">37</button>
+                  <button data-size="38">38</button>
+                  <button data-size="39">39</button>
+                  <button data-size="40">40</button>
+                  <button data-size="41">41</button>
+                  <button data-size="42">42</button>
+                  <button data-size="43">43</button>
                 </div>
               </div>
+              <button class="products-filters-button-apply">Применить</button>
+              <button class="products-filters-button-reset">Сбросить</button>
             </div>
-            <div class="products-filters-size">
-              <p>Размер</p>
-              <div class="products-filters-size-grid">
-                <button data-size="35">35</button>
-                <button data-size="36">36</button>
-                <button data-size="37">37</button>
-                <button data-size="38">38</button>
-                <button data-size="39">39</button>
-                <button data-size="40">40</button>
-                <button data-size="41">41</button>
-                <button data-size="42">42</button>
-                <button data-size="43">43</button>
-              </div>
-            </div>
-            <button class="products-filters-button-apply">Применить</button>
-            <button class="products-filters-button-reset">Сбросить</button>
+
+            <div class="products-grid"></div>
           </div>
-          <div class="products-grid"></div>
-          <button class="products-button">Показать еще</button>
+          <button id="products-button" class="products-button">
+            Показать еще
+          </button>
         </div>
       </section>
 
@@ -199,7 +204,9 @@
               <p class="basket-sum-title">Итого</p>
               <p class="basket-sum-subtitle">0 ₽</p>
             </div>
-            <div class="basket-button">Оформить заказ</div>
+            <div id="basket-button" class="basket-button hidden-basket-button">
+              Оформить заказ
+            </div>
           </div>
         </div>
       </dialog>
@@ -214,7 +221,8 @@
             <h4 class="dialog-order-title">Оформление заказа</h4>
             <div class="dialog-order-number">
               <span class="dialog-order-random">Заказ</span>
-              <span class="dialog-order-random random-number"></span>
+              <span class="dialog-order-random random-number">0</span>
+              <span class="dialog-order-random random-number">0</span>
             </div>
           </div>
           <div class="dialog-order-composition">
@@ -233,19 +241,59 @@
             <div class="dialog-order-composition-items-btn">
               <div class="dialog-order-composition-items-wrapper">
                 <span class="dialog-order-composition-items-title"
-                  >Состав заказа:</span
+                  >Состав заказа</span
                 >
-                <button class="dialog-order-composition-btn">›</button>
+                <button
+                  class="dialog-order-composition-btn dialog-order-composition-btn-active"
+                >
+                  ›
+                </button>
               </div>
-              <div class="dialog-order-composition-items"></div>
+              <div class="dialog-order-composition-wrapper">
+                <div
+                  id="dialog-order-composition-items"
+                  class="dialog-order-composition-items"
+                ></div>
+              </div>
             </div>
           </div>
-          <div class="dialog-order-form">
-            <input type="text" placeholder="Ваше имя" />
-            <input type="text" placeholder="Номер телефона" />
-            <input type="text" placeholder="E-mail" />
-            <button>Оформить заказ</button>
-          </div>
+          <form
+            id="dialog-order-form"
+            class="dialog-order-form"
+            action="#"
+            method="post"
+          >
+            <input
+              class="dialog-order-name"
+              type="text"
+              id="dialog-order-name"
+              name="dialog-order-name"
+              placeholder="Ваше имя"
+              required
+            />
+            <input
+              class="dialog-order-phone"
+              type="text"
+              id="dialog-order-phone"
+              name="dialog-order-phone"
+              placeholder="Номер телефона"
+              data-phone-pattern="+7 (___) ___-__-__"
+              data-phone-clear="true"
+              required
+            />
+            <input
+              class="dialog-order-email"
+              class="dialog-order-email"
+              type="email"
+              id="dialog-order-email"
+              name="dialog-order-email"
+              placeholder="E-mail"
+              required
+            />
+            <button class="dialog-order-button" type="submit">
+              Оформить заказ
+            </button>
+          </form>
         </div>
       </dialog>
 

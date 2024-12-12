@@ -599,8 +599,10 @@ filtersReset.addEventListener("click", () => {
 // #region products-section
 
 const productsGrid = document.querySelector(".products-grid");
+let countForProducts = 0;
 
 function filterProducts() {
+  countForProducts = 0;
   productsGrid.innerHTML = "";
 
   const filteredProducts = products.filter((product) => {
@@ -626,17 +628,21 @@ function filterProducts() {
   console.log(filteredProducts);
 
   filteredProducts.forEach((product, index) => {
+    countForProducts++;
     const productElement = document.createElement("div");
     productElement.classList.add("products-item");
 
     if (index === 1) {
       productElement.classList.add("products-item-2");
     }
-    if (index === 2) {
+    if (index === 2 || index === 3) {
       productElement.classList.add("products-item-3");
     }
-    if (index > 2) {
+    if (index === 3 || index === 4 || index === 5) {
       productElement.classList.add("products-item-4");
+    }
+    if (index > 5) {
+      productElement.classList.add("products-item-5");
     }
 
     productElement.innerHTML = `
@@ -689,19 +695,59 @@ function productsBtn() {
   }
 
   const productHidden2 = document.querySelector(".products-item-2");
-  const productHidden3 = document.querySelector(".products-item-3");
+  const productHidden3 = document.querySelectorAll(".products-item-3");
   const productHidden4 = document.querySelectorAll(".products-item-4");
+  const productHidden5 = document.querySelectorAll(".products-item-5");
 
   buttonOpenProducts.addEventListener("click", () => {
     productHidden2.classList.remove("products-item-2");
-    productHidden3.classList.remove("products-item-3");
+    productHidden3.forEach((product) => {
+      product.classList.remove("products-item-3");
+    });
     productHidden4.forEach((product) => {
       product.classList.remove("products-item-4");
+    });
+    productHidden5.forEach((product) => {
+      product.classList.remove("products-item-5");
     });
 
     buttonOpenProducts.classList.add("products-button-open");
   });
+  updateStyle();
 }
+
+function updateStyle() {
+  const buttonOpenProducts = document.querySelector(".products-button");
+
+  if (window.innerWidth > 1280 && countForProducts < 7) {
+    buttonOpenProducts.classList.add("products-button-open");
+  } else {
+    buttonOpenProducts.classList.remove("products-button-open");
+  }
+
+  if (window.innerWidth > 1024 && countForProducts < 5) {
+    buttonOpenProducts.classList.add("products-button-open");
+  } else {
+    buttonOpenProducts.classList.remove("products-button-open");
+  }
+
+  if (window.innerWidth > 768 && countForProducts < 3) {
+    buttonOpenProducts.classList.add("products-button-open");
+  } else {
+    buttonOpenProducts.classList.remove("products-button-open");
+  }
+
+  if (window.innerWidth > 480 && countForProducts < 2) {
+    buttonOpenProducts.classList.add("products-button-open");
+  } else {
+    buttonOpenProducts.classList.remove("products-button-open");
+  }
+}
+
+updateStyle();
+
+window.addEventListener("resize", updateStyle());
+
 // #endregion
 
 // #region dialog-product
@@ -734,7 +780,6 @@ function attachProductHandlers() {
       const product = products.find((item) => item.id === id);
       if (!product) return;
       console.log("Открыть диалог с продуктом:", product);
-      // Здесь же можно обновлять innerHTML диалога, а не снаружи
       updateDialogProductContent(product);
     });
   });
@@ -894,6 +939,7 @@ const btnBasket = document.querySelectorAll(".basket-open");
 const addToBasket = document.querySelectorAll(
   products.map((item) => `.${item.className.replace(".", "")}`).join(", ")
 );
+
 const numberOfItems = document.querySelector(".basket-items-toggle");
 
 function updateNumberOfItems() {
@@ -915,11 +961,18 @@ function toggleDialogBasket() {
 
 function renderBasketItems() {
   const basketContainer = document.getElementById("basket-items");
+  const dialogOrderCompositionItems = document.getElementById(
+    "dialog-order-composition-items"
+  );
+
   basketContainer.innerHTML = ""; // Очищаем контейнер перед рендерингом
+  dialogOrderCompositionItems.innerHTML = "";
 
   // Проходимся по массиву basket и добавляем элементы в разметку
   basket.forEach((item) => {
     const basketItem = document.createElement("div");
+    const dialogOrderCompositionItem = document.createElement("div");
+
     basketItem.className = "basket-item";
     basketItem.innerHTML = `
         <div class="basket-item-image">
@@ -934,13 +987,33 @@ function renderBasketItems() {
         </button>
       `;
 
+    dialogOrderCompositionItem.className = "dialog-order-composition-item";
+    dialogOrderCompositionItem.innerHTML = `
+          <div class="basket-item-image">
+            <img src="${item.images[0]}" alt="${item.name}" />
+          </div>
+          <div class="basket-item-info">
+            <p class="basket-item-name">${item.name}</p>
+            <p class="basket-item-price">${item.price} ₽</p>
+          </div>
+          <button class="basket-item-remove remove-from-dialog-order" data-id="${item.id}">
+            Удалить
+          </button>
+        `;
+
     // Добавляем обработчик для кнопки удаления
     basketItem
       .querySelector(".basket-item-remove")
       .addEventListener("click", () => {
         removeFromBasket(item.id);
       });
+    dialogOrderCompositionItem
+      .querySelector(".basket-item-remove")
+      .addEventListener("click", () => {
+        removeFromBasket(item.id);
+      });
 
+    dialogOrderCompositionItems.appendChild(dialogOrderCompositionItem);
     basketContainer.appendChild(basketItem);
     updateNumberOfItems();
   });
@@ -958,17 +1031,29 @@ function removeFromBasket(id) {
 }
 
 // Функция для подсчета итоговой суммы
+const basketButton = document.getElementById("basket-button");
+const dialogOrderPrice = document.querySelector(
+  ".dialog-order-composition-price-number"
+);
+const dialogOrderNumber = document.querySelector(
+  ".dialog-order-composition-count-number"
+);
+
 function updateTotalSum() {
   const totalSum = basket.reduce((sum, item) => sum + item.price, 0);
   if (totalSum === 0) {
+    basketButton.classList.add("hidden-basket-button");
     numberOfItems.classList.add("basket-items-disable");
     document.querySelector(
       ".basket-sum-subtitle"
     ).textContent = `${totalSum} ₽`;
   } else {
+    basketButton.classList.remove("hidden-basket-button");
     document.querySelector(
       ".basket-sum-subtitle"
     ).textContent = `${totalSum} ₽`;
+    dialogOrderPrice.textContent = `${totalSum} ₽`;
+    dialogOrderNumber.textContent = `${basket.length} шт`;
   }
 }
 
@@ -990,7 +1075,6 @@ dialogBasket.close();
 
 // #region dialog-order
 
-const basketButton = document.querySelector(".basket-button");
 const dialogOrder = document.getElementById("dialog-order");
 
 basketButton.addEventListener("click", () => {
@@ -998,12 +1082,64 @@ basketButton.addEventListener("click", () => {
   dialogOrder.showModal();
 });
 
+function toggleDialogOrder() {
+  if (dialogOrder.open) {
+    dialogOrder.close();
+  } else {
+    dialogOrder.showModal();
+  }
+}
+
+dialogOrder.addEventListener("click", (event) => {
+  if (event.target === dialogOrder) {
+    toggleDialogOrder();
+  }
+});
+
+const randomNumbers = document.querySelectorAll(".random-number");
+
+randomNumbers[0].innerHTML = Math.floor(Math.random() * 10000);
+randomNumbers[1].innerHTML = Math.floor(Math.random() * 100);
+
+const dialogOrderForm = document.querySelector("#dialog-order-form");
+
+dialogOrderForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const formData = new FormData(dialogOrderForm);
+  const data = Object.fromEntries(formData.entries());
+
+  const basketItems = [];
+  basket.forEach((item) => {
+    basketItems.push(item.name);
+  });
+  alert(
+    `
+    Количество товаров в заказе: ${dialogOrderNumber.textContent}
+    Сумма заказа: ${dialogOrderPrice.textContent}
+    Имя: ${data["dialog-order-name"]}
+    Телефон: ${data["dialog-order-phone"]}
+    E-mail: ${data["dialog-order-email"]}
+    Заказанные товары:
+${basketItems.map((item) => "    " + item).join(",\n")}
+    `
+  );
+});
+
+const dialogOrderCompositionButton = document.querySelector(
+  ".dialog-order-composition-btn"
+);
+const dialogOrderCompositionWrapper = document.querySelector(
+  ".dialog-order-composition-wrapper"
+);
+
+dialogOrderCompositionButton.addEventListener("click", () => {
+  dialogOrderCompositionWrapper.classList.toggle(
+    "dialog-order-composition-wrapper-hide"
+  );
+  dialogOrderCompositionButton.classList.toggle(
+    "dialog-order-composition-btn-active"
+  );
+});
 // #endregion
-
-// TODO При смене медии переносить фильтры влево
-
-// TODO Доделать диалог ордер
-
-// TODO Скрывать кнопку оформить заказ если нет товаров в корзине
 
 // TODO Скрывать кнопку показать еще если товаров после фильтра слишком мало
