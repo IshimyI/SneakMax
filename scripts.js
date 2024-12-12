@@ -570,6 +570,7 @@ filtersApply.addEventListener("click", () => {
   currentFilters.size = selectedSizes.filter((item) => item);
   filterProducts();
   productsBtn();
+  updateShowMoreButton();
 });
 
 const filtersReset = document.querySelector(".products-filters-button-reset");
@@ -590,6 +591,7 @@ filtersReset.addEventListener("click", () => {
   filterSize.forEach((size) => {
     size.classList.remove("active");
     filterProducts();
+    updateShowMoreButton();
   });
   productsBtn();
 });
@@ -680,6 +682,7 @@ function filterProducts() {
   });
   productsBtn();
   attachProductHandlers();
+  updateShowMoreButton();
 }
 filterProducts();
 
@@ -713,40 +716,45 @@ function productsBtn() {
 
     buttonOpenProducts.classList.add("products-button-open");
   });
-  updateStyle();
 }
 
-function updateStyle() {
+function updateShowMoreButton() {
   const buttonOpenProducts = document.querySelector(".products-button");
+  const productItems = document.querySelectorAll(".products-item"); // Все товары на странице
+  const count = productItems.length; // Количество товаров
 
-  if (window.innerWidth > 1280 && countForProducts < 7) {
-    buttonOpenProducts.classList.add("products-button-open");
+  if (window.innerWidth > 1280) {
+    // Для экранов больше 1280px
+    if (count <= 6) {
+      buttonOpenProducts.classList.add("products-button-open");
+    } else {
+      buttonOpenProducts.classList.remove("products-button-open");
+    }
+  } else if (window.innerWidth > 1024) {
+    // Для экранов больше 1024px
+    if (count <= 4) {
+      buttonOpenProducts.classList.add("products-button-open");
+    } else {
+      buttonOpenProducts.classList.remove("products-button-open");
+    }
+  } else if (window.innerWidth > 768) {
+    // Для экранов больше 768px
+    if (count <= 2) {
+      buttonOpenProducts.classList.add("products-button-open");
+    } else {
+      buttonOpenProducts.classList.remove("products-button-open");
+    }
   } else {
-    buttonOpenProducts.classList.remove("products-button-open");
-  }
-
-  if (window.innerWidth > 1024 && countForProducts < 5) {
-    buttonOpenProducts.classList.add("products-button-open");
-  } else {
-    buttonOpenProducts.classList.remove("products-button-open");
-  }
-
-  if (window.innerWidth > 768 && countForProducts < 3) {
-    buttonOpenProducts.classList.add("products-button-open");
-  } else {
-    buttonOpenProducts.classList.remove("products-button-open");
-  }
-
-  if (window.innerWidth > 480 && countForProducts < 2) {
-    buttonOpenProducts.classList.add("products-button-open");
-  } else {
-    buttonOpenProducts.classList.remove("products-button-open");
+    // Для остальных экранов
+    if (count <= 0) {
+      buttonOpenProducts.classList.add("products-button-open");
+    } else {
+      buttonOpenProducts.classList.remove("products-button-open");
+    }
   }
 }
 
-updateStyle();
-
-window.addEventListener("resize", updateStyle());
+window.addEventListener("resize", updateShowMoreButton);
 
 // #endregion
 
@@ -1141,5 +1149,3 @@ dialogOrderCompositionButton.addEventListener("click", () => {
   );
 });
 // #endregion
-
-// TODO Скрывать кнопку показать еще если товаров после фильтра слишком мало
